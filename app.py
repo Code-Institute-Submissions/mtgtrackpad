@@ -19,8 +19,23 @@ mongo = PyMongo(app)
 def homepage():
     return render_template("homepage.html")
 
+
+@app.route('/new_record')
+def new_record():
+    return render_template("newrecord.html")
+
+
+@app.route('/player_history')
+def player_history():
+    return render_template("playerhistory.html")
+
+
+@app.route('/edit_formats')
+def edit_formats():
+    return render_template("editformats.html")
+
+
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
     port=int(os.environ.get('PORT')),
     debug=True)
-
