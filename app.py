@@ -9,13 +9,17 @@ if path.exists("env.py"):
 
 app = Flask(__name__)
 
-app.config["MONGO_DBNAME"] = 'Project3'
+app.config["MONGO_DBNAME"] = os.environ["MONGODB_DBNAMEs"]
 app.config["MONGO_URI"] = os.environ.get("MONGODB_URIs")
 
 mongo = PyMongo(app)
 
 @app.route('/')
-@app.route('/homepage')
-def get_hompage():
-    return render_template("homepage.html",formats=mongo.db.MtG_Formats.find())
+def hello():
+    return "Hello World... Again"
+
+if __name__ == '__main__':
+    app.run(host=os.environ.get('IP'),
+    port=int(os.environ.get('PORT')),
+    debug=True)
 
