@@ -1,27 +1,110 @@
 <!DOCTYPE html>
 {% extends 'base.html'%} {% block content %}
 <div class="container">
-	<div class="row">
-		<div class="offset-3 col-6">
-			<h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
-		</div>
-	</div>
-    <div class="row">
-        <div class="col-12">
-            <p class="m-3 text-center">MTG Trackpad is designed as an open data port for you to record you event records as you play MTG. This is much like how your record was tracked by the old DCI methods, except for manual input.</p>
-        </div>
+  <div class="row">
+    <div class="offset-3 col-6">
+      <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
     </div>
-        <div class="row">
-        <div class="col-12">
-            <p class="m-3 text-center">Please take a look around and when you're ready, record your first event or run of games on MTG Trackpad via the New Record link within the navigation bar</p>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p class="m-3 text-center">
+        MTG Trackpad is designed as an open data port for you to record you
+        event records as you play MTG. This is much like how your record was
+        tracked by the old DCI methods, except for manual input.
+      </p>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <p class="m-3 text-center">
+        Please take a look around and when you're ready, record your first event
+        or run of games on MTG Trackpad via the New Record link within the
+        navigation bar
+      </p>
+    </div>
+  </div>
 </div>
 <div class="container">
-    <div class="row">
-        <div class="offset-2 col-8">
-        <h2 class=" my-2 text-center border">Advertisement</h2>
-        </div>
+  <div class="row">
+    <div class="offset-2 col-8">
+      <h2 class="my-2 text-center border">Advertisement</h2>
     </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="offset-3 col-6">
+      <h3 class="m-3 text-center">Recent Event Records</h3>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      {% set count = namespace(value=0) %} {% for record in records %}
+      <table>
+        <tr>
+          <th>Player</th>
+          <th>Event</th>
+          <th>Format</th>
+          <th>Deck</th>
+          <th>Date</th>
+          <th>Record</th>
+        </tr>
+        <tr>
+          <td>{{record.player_name}}</td>
+          <td>Event</td>
+          <td>{{record.format}}</td>
+          <td>{{record.deck_name}}</td>
+          <td>{{record.event_date}}</td>
+          <td>7 - 2</td>
+        </tr>
+      </table>
+      <p>
+        <a
+          class="btn btn-primary"
+          data-toggle="collapse"
+          href="#multiCollapseExample{{ count.value }}"
+          role="button"
+          aria-expanded="false"
+          aria-controls="multiCollapseExample{{ count.value }}"
+          >Toggle first element</a
+        >
+      </p>
+      <div class="row">
+        <div class="col">
+          <div
+            class="collapse multi-collapse"
+            id="multiCollapseExample{{ count.value }}"
+          >
+            <div class="card card-body">
+              <table>
+                <tr>
+                  <th>Round</th>
+                  <th>Vs</th>
+                  <th>Deck</th>
+                  <th>Win</th>
+                  <th>Draw</th>
+                  <th>Loss</th>
+                </tr>
+                {% for rounds in record.event_rounds %}
+                <tr>
+                        <td>{{ rounds.round_no }}</td>
+                        <td>{{ rounds.opp_name }}</td>
+                        <td>{{ rounds.opp_deck }}</td>
+                        <td>{{ rounds.game_wins }}</td>
+                        <td>{{ rounds.game_draws }}</td>
+                        <td>{{ rounds.game_loss }}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% set count.value = count.value + 1 %} {% endfor %}
+    </div>
+  </div>
 </div>
 {% endblock %}
