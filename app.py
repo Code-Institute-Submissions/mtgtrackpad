@@ -18,7 +18,7 @@ mongo = PyMongo(app)
 @app.route('/homepage')
 def homepage():
     return render_template("homepage.html",
-    records=mongo.db.Player_Records.find())
+    records=mongo.db.Player_Records.find().sort("event_date", -1))
 
 
 @app.route('/new_record')
@@ -31,9 +31,9 @@ def player_history():
     return render_template("playerhistory.html")
 
 
-@app.route('/edit_formats')
-def edit_formats():
-    return render_template("editformats.html")
+@app.route('/add_events')
+def add_events():
+    return render_template("addevents.html")
 
 
 if __name__ == '__main__':

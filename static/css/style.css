@@ -6,3 +6,25 @@ html, body {
     padding: 0px;
     margin: 0px;
 }
+
+body {
+    background-color: rgb(208, 255, 239);
+}
+
+table {
+  table-layout: fixed ;
+  width: 100% ;
+}
+.small-td, .small-th {
+  width: 50% ;
+}
+
+.more-deets {
+    width: 100%;
+}
+
+.event-seperator {
+    background-color: rgb(212, 216, 212);
+    border-radius: 5px;
+}
+
