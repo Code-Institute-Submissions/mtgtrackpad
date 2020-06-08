@@ -11,6 +11,10 @@ body {
     background-color: rgb(208, 255, 239);
 }
 
+label {
+    margin-top: .5rem;
+}
+
  tr>td:first-child {
    border:0px;
  }
@@ -62,6 +66,14 @@ table {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+#roundwins, #rounddraws, #roundloss {
+    width: 50px;
+}
+
+.sub-form {
+    font-size: 0.80rem;
 }
 
 @media only screen and (min-width: 600px) {

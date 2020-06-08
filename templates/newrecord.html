@@ -1,8 +1,62 @@
 <!DOCTYPE html>
-{% extends 'base.html'%} {% block content %}
-<div class="row">
-<div class="offset-3 col-6">
-<h3 class="m-3">New Record</h3>
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h3 class="m-3 text-center">New Event Record</h3>
+    </div>
+  </div>
 </div>
-</div>
+
+<form id="neweventform" method="POST" action="{{ url_for('new_record') }}">
+  <div class="container-fluid my-3">
+    <div class="row">
+      <div class="col-12">
+        {{ formX.csrf_token }} {{ formX.username.label }} {{ formX.username }}
+        {{ formX.mtgformat.label }} {{ formX.mtgformat }} {{
+        formX.deckname.label }} {{ formX.deckname }} {{ formX.date.label }} {{
+        formX.date }}
+      </div>
+    </div>
+  </div>
+  <div id="clone-div">
+  <div id="recordtemplate">
+    <div id="recordsubform" class="container-fluid my-3 p-2 border sub-form">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h6>Round 1</h6>
+        </div>
+        <div class="col-12 text-center">
+          {{ formY.csrf_token }} {{ formY.oppname.label }} {{ formY.oppname }}
+          {{ formY.oppdeck.label }} {{ formY.oppdeck }} {{ formY.roundwins.label
+          }} {{ formY.roundwins }} {{ formY.rounddraws.label }} {{
+          formY.rounddraws }} {{ formY.roundloss.label }} {{ formY.roundloss }}
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <div class="container my-3">
+    <div class="row text-center">
+      <div class="col-4">
+        <input id="addnewround" class="btn btn-success" value="Add New Round" />
+      </div>
+      <div class="col-4">
+        <input
+          class="btn btn-primary"
+          type="submit"
+          value="Save Event Record"
+        />
+      </div>
+      <div class="col-4">
+        <input
+          class="btn btn-warning"
+          type="submit"
+          value="Delete Last Round"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+
 {% endblock %}
