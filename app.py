@@ -1,7 +1,11 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+
+from flask import Flask, render_template, redirect, url_for
+from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm, RecaptchaField
+from wtforms import StringField, PasswordField, BooleanField, TextField, SubmitField
+from wtforms.validators import InputRequired, Email, Length
 from flask_pymongo import PyMongo
-from forms import ContactForm
 from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
@@ -14,6 +18,14 @@ app.config["MONGO_URI"] = os.environ.get("MONGODB_URIs")
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEYs")
 
 mongo = PyMongo(app)
+
+class ContactForm(FlaskForm):
+    """Contact form."""
+    name = StringField('Name', validators=[InputRequired()])
+    email = StringField("Email", validators=[InputRequired(), Email(message=("This field requires a valid email address"))])
+    body = StringField('Message', validators=[InputRequired(), Length(min=10, message=('Your message is too short.'))])
+    recaptcha = RecaptchaField()
+    submit = SubmitField('Submit')
 
 
 @app.route('/')
@@ -42,13 +54,8 @@ def add_events():
 def contact_us():
     form = ContactForm()
     if form.validate_on_submit():
-        return '<h1>' + form.name.data + ' ' + form.email.data + ' ' + form.body.data + '</h1>'
+        return "<p>Got it!</p>"
     return render_template('contactus.html', form=form)
-
-
-@app.route('/contacted')
-def contacted():
-    return render_template('contacted.html')
 
 
 if __name__ == '__main__':
