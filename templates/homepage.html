@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 {% extends 'base.html'%} {% block content %}
+<!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
 <div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
     </div>
   </div>
+  <!-- ---------------INTRO ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
@@ -15,6 +18,7 @@
       </p>
     </div>
   </div>
+  <!-- ---------------CTA ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
@@ -25,20 +29,25 @@
     </div>
   </div>
 </div>
+
+<!-- ---------------ADVERT CONTAINER---------------  -->
+<div class="container"></div>
+
+<!-- ---------------RECENT RECORDS CONTAINER---------------  -->
 <div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <h3 class="m-3 text-center">Recent Event Records</h3>
     </div>
   </div>
-</div>
-<div class="container">
-  <div class="row">
+  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
+  {% set count = namespace(value=0) %} {% for record in records | batch(5) |
+  first %}
+  <div class="row d-md-none">
     <div class="col-12">
-      {% set count = namespace(value=0) %} {% for record in records | batch(10)
-      | first %}
       <div class="container border my-1 event-seperator">
-        <table class="col-sm-12 d-md-none my-2 text-center">
+        <table class="my-2 text-center">
           <tr>
             <th>Player</th>
             <td>{{record.player_name}}</td>
@@ -64,25 +73,7 @@
             <td>7 - 2</td>
           </tr>
         </table>
-        <table class="d-none d-md-block col-md-12">
-          <tr>
-            <th>Player</th>
-            <th>Event</th>
-            <th>Format</th>
-            <th>Deck</th>
-            <th>Date</th>
-            <th>Record</th>
-          </tr>
-          <tr>
-            <td>{{record.player_name}}</td>
-            <td>Event</td>
-            <td>{{record.format}}</td>
-            <td>{{record.deck_name}}</td>
-            <td>{{record.event_date}}</td>
-            <td>7 - 2</td>
-          </tr>
-        </table>
-        <p>
+        <p class="text-center my-2">
           <a
             class="btn btn-success more-deets"
             data-toggle="collapse"
@@ -100,26 +91,6 @@
               id="multiCollapseExample{{ count.value }}"
             >
               <div class="card card-body">
-                <table class="d-none d-md-block">
-                  <tr>
-                    <th>Round</th>
-                    <th>Vs</th>
-                    <th>Deck</th>
-                    <th>Win</th>
-                    <th>Draw</th>
-                    <th>Loss</th>
-                  </tr>
-                  {% for rounds in record.event_rounds %}
-                  <tr>
-                    <td>{{ rounds.round_no }}</td>
-                    <td>{{ rounds.opp_name }}</td>
-                    <td>{{ rounds.opp_deck }}</td>
-                    <td>{{ rounds.game_wins }}</td>
-                    <td>{{ rounds.game_draws }}</td>
-                    <td>{{ rounds.game_loss }}</td>
-                  </tr>
-                  {% endfor %}
-                </table>
                 {% for rounds in record.event_rounds %}
                 <table class="d-md-none text-center">
                   <tr>
@@ -154,8 +125,81 @@
           </div>
         </div>
       </div>
-      {% set count.value = count.value + 1 %} {% endfor %}
     </div>
   </div>
+  {% set count.value = count.value + 1 %} {% endfor %}
+  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS---------------  -->
+  {% set count = namespace(value=0) %} {% for record in records | batch(5) |
+  first %}
+  <div class="row d-none d-md-block">
+    <div class="col-12">
+      <div class="container border my-1 event-seperator">
+        <table class="text-center m-auto main-table">
+          <tr>
+            <th class="med-th">Player</th>
+            <th class="med-th">Event</th>
+            <th class="med-th">Format</th>
+            <th class="med-th">Deck</th>
+            <th class="med-th">Date</th>
+            <th class="med-th">Record</th>
+          </tr>
+          <tr>
+            <td class="med-td">{{record.player_name}}</td>
+            <td class="med-td">Event</td>
+            <td class="med-td">{{record.format}}</td>
+            <td class="med-td">{{record.deck_name}}</td>
+            <td class="med-td">{{record.event_date}}</td>
+            <td class="med-td">7 - 2</td>
+          </tr>
+        </table>
+        <p class="text-center my-2">
+          <a
+            class="btn btn-success more-deets"
+            data-toggle="collapse"
+            href="#multiCollapseExample{{ count.value }}"
+            role="button"
+            aria-expanded="false"
+            aria-controls="multiCollapseExample{{ count.value }}"
+            ><i class="fa fa-caret-down"></i
+          ></a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div
+              class="collapse multi-collapse my-2"
+              id="multiCollapseExample{{ count.value }}"
+            >
+              <div class="card card-body">
+                <table class="text-center m-auto sub-table">
+                  <tbody>
+                    <tr>
+                      <th class="sub-th">Round</th>
+                      <th class="sub-th">Vs</th>
+                      <th class="sub-th">Deck</th>
+                      <th class="sub-th">Win</th>
+                      <th class="sub-th">Draw</th>
+                      <th class="sub-th">Loss</th>
+                    </tr>
+                    {% for rounds in record.event_rounds %}
+                    <tr>
+                      <td class="sub-td">{{ rounds.round_no }}</td>
+                      <td class="sub-td">{{ rounds.opp_name }}</td>
+                      <td class="sub-td">{{ rounds.opp_deck }}</td>
+                      <td class="sub-td">{{ rounds.game_wins }}</td>
+                      <td class="sub-td">{{ rounds.game_draws }}</td>
+                      <td class="sub-td">{{ rounds.game_loss }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% set count.value = count.value + 1 %} {% endfor %}
 </div>
+
 {% endblock %}
