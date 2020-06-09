@@ -1,57 +1,139 @@
 <!DOCTYPE html>
 {% extends 'base.html' %} {% block content %}
+<!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
 <div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <h3 class="m-3 text-center">New Event Record</h3>
     </div>
   </div>
 </div>
+<hr />
 
-<form id="neweventform" method="POST" action="{{ url_for('new_record') }}">
-  <div class="container-fluid my-3">
-    <div class="row">
-      <div class="col-12">
-        {{ formX.csrf_token }} {{ formX.username.label }} {{ formX.username }}
-        {{ formX.mtgformat.label }} {{ formX.mtgformat }} {{
-        formX.deckname.label }} {{ formX.deckname }} {{ formX.date.label }} {{
-        formX.date }}
-      </div>
-    </div>
-  </div>
-  <div id="clone-div">
-  <div id="recordtemplate">
-    <div id="recordsubform" class="container-fluid my-3 p-2 border sub-form">
-      <div class="row">
-        <div class="col-12 text-center">
-          <h6>Round 1</h6>
-        </div>
-        <div class="col-12 text-center">
-          {{ formY.csrf_token }} {{ formY.oppname.label }} {{ formY.oppname }}
-          {{ formY.oppdeck.label }} {{ formY.oppdeck }} {{ formY.roundwins.label
-          }} {{ formY.roundwins }} {{ formY.rounddraws.label }} {{
-          formY.rounddraws }} {{ formY.roundloss.label }} {{ formY.roundloss }}
-        </div>
-      </div>
-    </div>
-    </div>
-  </div>
-  <div class="container my-3">
+<!-- ---------------USER DATA FORM---------------  -->
+<form id="neweventform" method="POST" action="{{ url_for('add_record') }}">
+  <!-- ---------------USER DATA CONTAINER---------------  -->
+  <div class="container-fluid">
+    <!-- ---------------USER DATA FORM RESPONSIVE ROW---------------  -->
     <div class="row text-center">
-      <div class="col-4">
-        <input id="addnewround" class="btn btn-success" value="Add New Round" />
+      <div class="col-12 col-md-3">
+        <div class="row">
+          <div class="col-6 col-md-12 my-2">{{ formX.player_name.label }}</div>
+          <div class="col-6 col-md-12 my-2">{{ formX.player_name }}</div>
+        </div>
       </div>
-      <div class="col-4">
+      <div class="col-12 col-md-3">
+        <div class="row">
+          <div class="col-6 col-md-12 my-2">{{ formX.mtgformat.label }}</div>
+          <div class="col-6 col-md-12 my-2">{{ formX.mtgformat }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="row">
+          <div class="col-6 col-md-12 my-2">{{ formX.deck_name.label }}</div>
+          <div class="col-6 col-md-12 my-2">{{ formX.deck_name }}</div>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class="row">
+          <div class="col-6 col-md-12 my-2">{{ formX.event_date.label }}</div>
+          <div class="col-6 col-md-12 my-2">{{ formX.event_date }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------ROUND DATA TITLE CONTAINER---------------  -->
+  <div id="clone-div">
+    <div id="recordtemplate">
+      <div id="recordsubform" class="sub-form">
+        <div class="container-fluid my-3 p-2 border">
+          <!-- ---------------TITLE ROW---------------  -->
+          <div class="row text-center">
+            <div class="col-12">
+              <h6>Event Round 1</h6>
+            </div>
+          </div>
+          <!-- ---------------ROUND DATA CONTAINER---------------  -->
+
+          <div class="container-fluid sub-form">
+            <!-- ---------------ROUND DATA FORM RESPONSIVE ROW---------------  -->
+            <div class="row text-center">
+              <div class="col-12 col-md-3">
+                <div class="row">
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.oppname.label }}
+                  </div>
+                  <div class="col-6 col-md-12 my-2">{{ formY.oppname }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-3">
+                <div class="row">
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.oppdeck.label }}
+                  </div>
+                  <div class="col-6 col-md-12 my-2">{{ formY.oppdeck }}</div>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <div class="row">
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.roundwins.label }}
+                  </div>
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.roundwins(class_="roundwins") }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <div class="row">
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.rounddraws.label }}
+                  </div>
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.rounddraws(class_="roundwins") }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-md-2">
+                <div class="row">
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.roundloss.label }}
+                  </div>
+                  <div class="col-6 col-md-12 my-2">
+                    {{ formY.roundloss(class_="roundloss") }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------FORM BUTTONS CONTAINER---------------  -->
+  <div class="container-fluid my-3">
+    <div class="row text-center">
+      <div class="col-12 col-md-4 my-2">
+        <input
+          type="button"
+          id="addnewround"
+          class="btn btn-success"
+          value="Add New Round"
+        />
+      </div>
+      <div class="col-12 col-md-4 my-2">
         <input
           class="btn btn-primary"
           type="submit"
           value="Save Event Record"
         />
       </div>
-      <div class="col-4">
+      <div class="col-12 col-md-4 my-2">
         <input
+          type="button"
+          id="deletelastround"
           class="btn btn-warning"
-          type="submit"
           value="Delete Last Round"
         />
       </div>

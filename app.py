@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import StringField, PasswordField, BooleanField, TextField, SubmitField, IntegerField
 from flask_bootstrap import Bootstrap
@@ -8,11 +8,21 @@ from wtforms.validators import InputRequired, Email, Length
 from wtforms.fields.html5 import DateField
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from datetime import datetime
 from os import path
 if path.exists("env.py"):
     import env
 
 app = Flask(__name__)
+
+
+@app.template_filter('datetimeformat')
+def datetimeformat(value, format='%B'):
+    return value.strftime(format)
+
+
+app.jinja_env.filters['datetimeformat'] = datetimeformat
+
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGODB_DBNAMEs")
 app.config["MONGO_URI"] = os.environ.get("MONGODB_URIs")
@@ -22,13 +32,14 @@ mongo = PyMongo(app)
 
 
 class NewEvent(FlaskForm):
-    username = StringField('Your Name')
+    player_name = StringField('Your Name')
     mtgformat = StringField('Format')
-    deckname = StringField('Deck Name')
-    date = DateField("Date", format='%Y-%m-%d')
+    deck_name = StringField('Deck Name')
+    event_date = DateField("Date", format='%Y-%m-%d')
 
 
 class NewRound(FlaskForm):
+    event_rounds = IntegerField('Round')
     oppname = StringField('Opponent Name')
     oppdeck = StringField('Deck Name')
     roundwins = IntegerField("Games Won")
@@ -36,14 +47,18 @@ class NewRound(FlaskForm):
     roundloss = IntegerField("Games Lost")
 
 
-@app.route('/new_record', methods=('GET', 'POST'))
+@app.route('/new_record', methods=['GET', 'POST'])
 def new_record():
     formX = NewEvent()
     formY = NewRound()
-
-    if formX.validate_on_submit():
-        return '<h1>The username is {}. The password is {}. Games Won were {}</h1>'.format(formX.username.data, formX.mtgformat.data, formY.roundwins.data)
     return render_template('newrecord.html', formX=formX, formY=formY)
+
+
+@app.route('/add_record', methods=['POST'])
+def add_record():
+    records = mongo.db.Player_Records
+    records.insert_one(request.form.to_dict())
+    return redirect(url_for('homepage'))
 
 
 @app.route('/')
@@ -56,11 +71,6 @@ def homepage():
 @app.route('/player_history')
 def player_history():
     return render_template("playerhistory.html")
-
-
-@app.route('/add_events')
-def add_events():
-    return render_template("addevents.html")
 
 
 if __name__ == '__main__':

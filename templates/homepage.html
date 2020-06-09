@@ -29,10 +29,8 @@
     </div>
   </div>
 </div>
-
 <!-- ---------------ADVERT CONTAINER---------------  -->
 <div class="container"></div>
-
 <!-- ---------------RECENT RECORDS CONTAINER---------------  -->
 <div class="container">
   <!-- ---------------TITLE ROW---------------  -->
@@ -41,9 +39,10 @@
       <h3 class="m-3 text-center">Recent Event Records</h3>
     </div>
   </div>
-  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
+  <!-- ---------------CONTENT JINJA LOOP---------------  -->
   {% set count = namespace(value=0) %} {% for record in records | batch(5) |
   first %}
+  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
   <div class="row d-md-none">
     <div class="col-12">
       <div class="container border my-1 event-seperator">
@@ -53,12 +52,8 @@
             <td>{{record.player_name}}</td>
           </tr>
           <tr>
-            <th>Event</th>
-            <td>Event</td>
-          </tr>
-          <tr>
             <th>Format</th>
-            <td>{{record.format}}</td>
+            <td>{{record.mtgformat}}</td>
           </tr>
           <tr>
             <th>Deck</th>
@@ -66,7 +61,7 @@
           </tr>
           <tr>
             <th>Date</th>
-            <td>{{record.event_date}}</td>
+            <td>{{ record.event_date }}</td>
           </tr>
           <tr>
             <th>Record</th>
@@ -120,6 +115,17 @@
                 </table>
                 <hr class="d-md-none" />
                 {% endfor %}
+                <div class="row text-center">
+                  <div class="col-12 my-3">
+                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                  </div>
+                  <div class="col-12 my-3">
+                    <input
+                      class="btn btn-warning m-auto"
+                      value="Delete Record"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -127,17 +133,13 @@
       </div>
     </div>
   </div>
-  {% set count.value = count.value + 1 %} {% endfor %}
-  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS---------------  -->
-  {% set count = namespace(value=0) %} {% for record in records | batch(5) |
-  first %}
+  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
   <div class="row d-none d-md-block">
     <div class="col-12">
       <div class="container border my-1 event-seperator">
         <table class="text-center m-auto main-table">
           <tr>
             <th class="med-th">Player</th>
-            <th class="med-th">Event</th>
             <th class="med-th">Format</th>
             <th class="med-th">Deck</th>
             <th class="med-th">Date</th>
@@ -145,10 +147,9 @@
           </tr>
           <tr>
             <td class="med-td">{{record.player_name}}</td>
-            <td class="med-td">Event</td>
-            <td class="med-td">{{record.format}}</td>
+            <td class="med-td">{{record.mtgformat}}</td>
             <td class="med-td">{{record.deck_name}}</td>
-            <td class="med-td">{{record.event_date}}</td>
+            <td class="med-td">{{ record.event_date }}</td>
             <td class="med-td">7 - 2</td>
           </tr>
         </table>
@@ -192,6 +193,17 @@
                     {% endfor %}
                   </tbody>
                 </table>
+                <div class="row text-center">
+                  <div class="col-6 my-3">
+                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                  </div>
+                  <div class="col-6 my-3">
+                    <input
+                      class="btn btn-warning m-auto"
+                      value="Delete Record"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -200,6 +212,6 @@
     </div>
   </div>
   {% set count.value = count.value + 1 %} {% endfor %}
+  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
 </div>
-
 {% endblock %}
