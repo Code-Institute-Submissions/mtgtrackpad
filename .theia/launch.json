@@ -3,12 +3,19 @@
   // Hover to view descriptions of existing attributes.
   "version": "0.2.0",
   "configurations": [
+
       {
-            "name": "Python: Current File (Integrated Terminal)",
+            "name": "Flask Demo 10 - Launch",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
-            "console": "internalConsole"
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "app.py"
+            },
+            "args": [
+                "run"
+            ],
+            "jinja":=true
         }
   ]
 }
