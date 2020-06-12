@@ -102,15 +102,15 @@
                   </tr>
                   <tr>
                     <th class="small-th">Win</th>
-                    <td class="small-td">{{ rounds.game_wins }}</td>
+                    <td class="small-td">{{ rounds.games_won }}</td>
                   </tr>
                   <tr>
                     <th class="small-th">Draw</th>
-                    <td class="small-td">{{ rounds.game_draws }}</td>
+                    <td class="small-td">{{ rounds.games_drawn }}</td>
                   </tr>
                   <tr>
                     <th class="small-th">Loss</th>
-                    <td class="small-td">{{ rounds.game_loss }}</td>
+                    <td class="small-td">{{ rounds.games_lost }}</td>
                   </tr>
                 </table>
                 <hr class="d-md-none" />
@@ -186,9 +186,9 @@
                       <td class="sub-td">{{ rounds.round }}</td>
                       <td class="sub-td">{{ rounds.opp_name }}</td>
                       <td class="sub-td">{{ rounds.opp_deck }}</td>
-                      <td class="sub-td">{{ rounds.game_wins }}</td>
-                      <td class="sub-td">{{ rounds.game_draws }}</td>
-                      <td class="sub-td">{{ rounds.game_loss }}</td>
+                      <td class="sub-td">{{ rounds.games_won }}</td>
+                      <td class="sub-td">{{ rounds.games_drawn }}</td>
+                      <td class="sub-td">{{ rounds.games_lost }}</td>
                     </tr>
                     {% endfor %}
                   </tbody>

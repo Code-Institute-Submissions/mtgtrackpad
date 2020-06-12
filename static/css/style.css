@@ -8,13 +8,16 @@ html, body {
 }
 
 body {
-    background-color: rgb(208, 255, 239);
+    background-color: rgb(242, 248, 248);
 }
 
 input {
   padding: 0.2em; 
   box-sizing: border-box;
-  width: 100% 
+  width: 100%;
+  text-align: center;
+  border: solid 1px grey;
+  border-radius: 5px;
 }
 
 label {
@@ -40,6 +43,12 @@ table {
 
 .more-deets {
     width: 100%;
+}
+
+.box_form {
+    border-radius: 5px;
+    border: solid 1px black;
+    background-color:cornflowerblue;
 }
 
 .med-td, .med-th {

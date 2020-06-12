@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
 from wtforms.fields.html5 import DateField
-from forms import NewEvent, NewRound
+from forms import NewEvent
 from flask_pymongo import PyMongo
 from os import path
 if path.exists("env.py"):
@@ -24,8 +24,7 @@ mongo = PyMongo(app)
 @app.route('/new_record', methods=['GET', 'POST'])
 def new_record():
     formX = NewEvent()
-    formY = NewRound()
-    return render_template('newrecord.html', formX=formX, formY=formY)
+    return render_template('newrecord.html', formX=formX)
 
 
 @app.route('/add_record', methods=['POST'])
@@ -39,11 +38,19 @@ def add_record():
         'event_rounds': [
             {
                 'round': 1,
-                'opp_name': request.form.get('oppname'),
-                'opp_deck': request.form.get('oppdeck'),
-                'game_wins': request.form.get('roundwins'),
-                'game_draws': request.form.get('rounddraws'),
-                'game_loss': request.form.get('roundloss')
+                'opp_name': request.form.get('first_oppname'),
+                'opp_deck': request.form.get('first_oppdeck'),
+                'games_won': request.form.get('first_w'),
+                'games_drawn': request.form.get('first_d'),
+                'games_lost': request.form.get('first_l')
+            },
+            {
+                'round': 2,
+                'opp_name': request.form.get('second_oppname'),
+                'opp_deck': request.form.get('second_oppdeck'),
+                'games_won': request.form.get('second_w'),
+                'games_drawn': request.form.get('second_d'),
+                'games_lost': request.form.get('second_l')
             }
         ]
     }]
