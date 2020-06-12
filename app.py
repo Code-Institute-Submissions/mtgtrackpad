@@ -13,7 +13,7 @@ if path.exists("env.py"):
 app = Flask(__name__)
 
 
-app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAMEs")
+app.config["MONGO_DBNAME"] = os.environ.get("MONGODB_DBNAMEs")
 app.config["MONGO_URI"] = os.environ.get("MONGODB_URIs")
 app.config['SECRET_KEY'] = os.environ.get("SECRET_KEYs")
 
@@ -30,7 +30,7 @@ def new_record():
 
 @app.route('/add_record', methods=['POST'])
 def add_record():
-    records = mongo.db.Player_Records
+    newrecord = mongo.db.Player_Records
     formdata = [{
         'player_name': request.form.get('player_name'),
         'mtgformat': request.form.get('mtgformat'),
@@ -47,7 +47,7 @@ def add_record():
             }
         ]
     }]
-    records.insert_many(formdata)
+    newrecord.insert_many(formdata)
     return redirect(url_for('homepage'))
 
 
