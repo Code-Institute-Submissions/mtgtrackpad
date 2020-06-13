@@ -1,20 +1,20 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
 from wtforms.fields.html5 import DateField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import InputRequired
 
 
 class NewEvent(FlaskForm):
-    player_name = StringField('Your Name')
-    mtgformat = StringField('Format')
-    deck_name = StringField('Deck Name')
-    event_date = DateField('Date', format='%d-%m-%Y')
-    event_rounds = StringField('Round')
-    first_oppname = StringField('Opponent Name')
-    first_oppdeck = StringField('Deck Name')
-    first_w = IntegerField('Games Won')
-    first_d = IntegerField('Games Drawn')
-    first_l = IntegerField('Games Lost')
+    player_name = StringField('Your Name', validators=[InputRequired()])
+    mtgformat = StringField('Format', validators=[InputRequired()])
+    deck_name = StringField('Deck Name', validators=[InputRequired()])
+    event_date = DateField('Date', validators=[InputRequired()])
+    event_rounds = StringField('Round', validators=[InputRequired()])
+    first_oppname = StringField('Opponent Name', validators=[InputRequired()])
+    first_oppdeck = StringField('Deck Name', validators=[InputRequired()])
+    first_w = IntegerField('Games Won', validators=[InputRequired()])
+    first_d = IntegerField('Games Drawn', validators=[InputRequired()])
+    first_l = IntegerField('Games Lost', validators=[InputRequired()])
     second_oppname = StringField('Opponent Name')
     second_oppdeck = StringField('Deck Name')
     second_w = IntegerField('Games Won')
@@ -35,3 +35,6 @@ class NewEvent(FlaskForm):
     fifth_w = IntegerField('Games Won')
     fifth_d = IntegerField('Games Drawn')
     fifth_l = IntegerField('Games Lost')
+    eventstatusinput = StringField('Event Status:')
+    eventrecordinput = StringField('Event Record (Win/Draw/Loss):')
+    eventgamewin = StringField('Event Game Win %:')

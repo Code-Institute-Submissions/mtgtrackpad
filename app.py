@@ -51,8 +51,35 @@ def add_record():
                 'games_won': request.form.get('second_w'),
                 'games_drawn': request.form.get('second_d'),
                 'games_lost': request.form.get('second_l')
+            },
+            {
+                'round': 3,
+                'opp_name': request.form.get('third_oppname'),
+                'opp_deck': request.form.get('third_oppdeck'),
+                'games_won': request.form.get('third_w'),
+                'games_drawn': request.form.get('third_d'),
+                'games_lost': request.form.get('third_l')
+            },
+            {
+                'round': 4,
+                'opp_name': request.form.get('fourth_oppname'),
+                'opp_deck': request.form.get('fourth_oppdeck'),
+                'games_won': request.form.get('fourth_w'),
+                'games_drawn': request.form.get('fourth_d'),
+                'games_lost': request.form.get('fourth_l')
+            },
+            {
+                'round': 5,
+                'opp_name': request.form.get('fifth_oppname'),
+                'opp_deck': request.form.get('fifth_oppdeck'),
+                'games_won': request.form.get('fifth_w'),
+                'games_drawn': request.form.get('fifth_d'),
+                'games_lost': request.form.get('fifth_l')
             }
-        ]
+        ],
+        'final_record': request.form.get('eventrecordinput'),
+        'gamewin_perc': request.form.get('eventgamewin'),
+        'event_status': request.form.get('eventstatusinput')
     }]
     newrecord.insert_many(formdata)
     return redirect(url_for('homepage'))
