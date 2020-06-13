@@ -41,7 +41,7 @@
   </div>
   <!-- ---------------CONTENT JINJA LOOP---------------  -->
   {% set count = namespace(value=0) %} {% for record in records | batch(5) |
-  first %}
+  last %}
   <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
   <div class="row d-md-none">
     <div class="col-12">
