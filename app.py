@@ -5,6 +5,7 @@ from wtforms import StringField, IntegerField
 from wtforms.fields.html5 import DateField
 from forms import NewEvent
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from os import path
 if path.exists("env.py"):
     import env
@@ -89,7 +90,7 @@ def add_record():
 @app.route('/homepage')
 def homepage():
     return render_template("homepage.html",
-                           records=mongo.db.Player_Records.find())
+            records=mongo.db.Player_Records.find())#.sort({"_id", -1}).limit(5))
 
 
 @app.route('/player_history')
