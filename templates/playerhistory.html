@@ -1,8 +1,216 @@
 <!DOCTYPE html>
 {% extends 'base.html'%} {% block content %}
-<div class="row">
-<div class="offset-3 col-6">
-<h3 class="m-3">Player History</h3>
+<!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
+<div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
+  <div class="row">
+    <div class="col-12">
+      <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
+    </div>
+  </div>
+  <!-- ---------------INTRO ROW---------------  -->
+  <div class="row">
+    <div class="col-12">
+      <p class="m-3 text-center">
+        MTG Trackpad is designed as an open data port for you to record you
+        event records as you play MTG. This is much like how your record was
+        tracked by the old DCI methods, except for manual input.
+      </p>
+    </div>
+  </div>
+  <!-- ---------------CTA ROW---------------  -->
+  <div class="row">
+    <div class="col-12">
+      <p class="m-3 text-center">
+        Please take a look around and when you're ready, record your first event
+        or run of games on MTG Trackpad via the New Record link within the
+        navigation bar
+      </p>
+    </div>
+  </div>
 </div>
+<!-- ---------------ADVERT CONTAINER---------------  -->
+<div class="container"></div>
+<!-- ---------------RECENT RECORDS CONTAINER---------------  -->
+<div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
+  <div class="row">
+    <div class="col-12">
+      <h3 class="m-3 text-center">Recent Event Records</h3>
+    </div>
+  </div>
+  <!-- ---------------CONTENT JINJA LOOP---------------  -->
+  {% set count = namespace(value=0) %} {% for record in records %}
+  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
+  <div class="row d-md-none">
+    <div class="col-12">
+      <div class="container border my-1 event-seperator">
+        <table class="my-2 text-center">
+          <tr>
+            <th>Player</th>
+            <td>{{record.player_name}}</td>
+          </tr>
+          <tr>
+            <th>Format</th>
+            <td>{{record.mtgformat}}</td>
+          </tr>
+          <tr>
+            <th>Deck</th>
+            <td>{{record.deck_name}}</td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td>{{ record.event_date }}</td>
+          </tr>
+          <tr>
+            <th>Record</th>
+            <td>{{ record.final_record }}</td>
+          </tr>
+        </table>
+        <p class="text-center my-2">
+          <a
+            class="btn btn-success more-deets"
+            data-toggle="collapse"
+            href="#multiCollapseExample{{ count.value }}"
+            role="button"
+            aria-expanded="false"
+            aria-controls="multiCollapseExample{{ count.value }}"
+            ><i class="fa fa-caret-down"></i
+          ></a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div
+              class="collapse multi-collapse my-2"
+              id="multiCollapseExample{{ count.value }}"
+            >
+              <div class="card card-body">
+                {% for rounds in record.event_rounds %}
+                <table class="d-md-none text-center">
+                  <tr>
+                    <th class="small-th">Round</th>
+                    <td class="small-td">{{ rounds.round_no }}</td>
+                  </tr>
+                  <tr>
+                    <th class="small-th">Vs</th>
+                    <td class="small-td">{{ rounds.opp_name }}</td>
+                  </tr>
+                  <tr>
+                    <th class="small-th">Deck</th>
+                    <td class="small-td">{{ rounds.opp_deck }}</td>
+                  </tr>
+                  <tr>
+                    <th class="small-th">Win</th>
+                    <td class="small-td">{{ rounds.games_won }}</td>
+                  </tr>
+                  <tr>
+                    <th class="small-th">Draw</th>
+                    <td class="small-td">{{ rounds.games_drawn }}</td>
+                  </tr>
+                  <tr>
+                    <th class="small-th">Loss</th>
+                    <td class="small-td">{{ rounds.games_lost }}</td>
+                  </tr>
+                </table>
+                <hr class="d-md-none" />
+                {% endfor %}
+                <div class="row text-center">
+                  <div class="col-12 my-3">
+                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                  </div>
+                  <div class="col-12 my-3">
+                    <input
+                      class="btn btn-warning m-auto"
+                      value="Delete Record"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
+  <div class="row d-none d-md-block">
+    <div class="col-12">
+      <div class="container border my-1 event-seperator">
+        <table class="text-center m-auto main-table">
+          <tr>
+            <th class="med-th">Player</th>
+            <th class="med-th">Format</th>
+            <th class="med-th">Deck</th>
+            <th class="med-th">Date</th>
+            <th class="med-th">Record</th>
+          </tr>
+          <tr>
+            <td class="med-td">{{record.player_name}}</td>
+            <td class="med-td">{{record.mtgformat}}</td>
+            <td class="med-td">{{record.deck_name}}</td>
+            <td class="med-td">{{ record.event_date }}</td>
+            <td class="med-td">{{ record.final_record }}</td>
+          </tr>
+        </table>
+        <p class="text-center my-2">
+          <a
+            class="btn btn-success more-deets"
+            data-toggle="collapse"
+            href="#multiCollapseExample{{ count.value }}"
+            role="button"
+            aria-expanded="false"
+            aria-controls="multiCollapseExample{{ count.value }}"
+            ><i class="fa fa-caret-down"></i
+          ></a>
+        </p>
+        <div class="row">
+          <div class="col">
+            <div
+              class="collapse multi-collapse my-2"
+              id="multiCollapseExample{{ count.value }}"
+            >
+              <div class="card card-body">
+                <table class="text-center m-auto sub-table">
+                  <tbody>
+                    <tr>
+                      <th class="sub-th">Round</th>
+                      <th class="sub-th">Vs</th>
+                      <th class="sub-th">Deck</th>
+                      <th class="sub-th">Win</th>
+                      <th class="sub-th">Draw</th>
+                      <th class="sub-th">Loss</th>
+                    </tr>
+                    {% for rounds in record.event_rounds %}
+                    <tr>
+                      <td class="sub-td">{{ rounds.round }}</td>
+                      <td class="sub-td">{{ rounds.opp_name }}</td>
+                      <td class="sub-td">{{ rounds.opp_deck }}</td>
+                      <td class="sub-td">{{ rounds.games_won }}</td>
+                      <td class="sub-td">{{ rounds.games_drawn }}</td>
+                      <td class="sub-td">{{ rounds.games_lost }}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <div class="row text-center">
+                  <div class="col-6 my-3">
+                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                  </div>
+                  <div class="col-6 my-3">
+                    <input
+                      class="btn btn-warning m-auto"
+                      value="Delete Record"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% set count.value = count.value + 1 %} {% endfor %}
+  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
 </div>
 {% endblock %}

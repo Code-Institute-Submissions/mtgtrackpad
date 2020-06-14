@@ -89,13 +89,14 @@ def add_record():
 @app.route('/')
 @app.route('/homepage')
 def homepage():
-    return render_template("homepage.html",
-            records=mongo.db.Player_Records.find())#.sort({"_id", -1}).limit(5))
+    records = mongo.db.Player_Records.find().sort('_id', -1).limit(5)
+    return render_template("homepage.html", records=records)
 
 
-@app.route('/player_history')
-def player_history():
-    return render_template("playerhistory.html")
+@app.route('/player_history/<player_id>', methods=['GET', 'POST'])
+def player_history(player_id):
+    records = mongo.db.Player_Records.find({"player_name": player_id})
+    return render_template("playerhistory.html", records=records)
 
 
 if __name__ == "__main__":
