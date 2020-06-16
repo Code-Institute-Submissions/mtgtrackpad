@@ -5,16 +5,14 @@
   <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
-      <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
+      <h3 class="m-3 text-center">Player History</h3>
     </div>
   </div>
   <!-- ---------------INTRO ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
-        MTG Trackpad is designed as an open data port for you to record you
-        event records as you play MTG. This is much like how your record was
-        tracked by the old DCI methods, except for manual input.
+        Welcome to your history of events.
       </p>
     </div>
   </div>
@@ -22,9 +20,8 @@
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
-        Please take a look around and when you're ready, record your first event
-        or run of games on MTG Trackpad via the New Record link within the
-        navigation bar
+        Here you can update or delete your previous records that no longer hold any value for you. Please keep them around if you can, as this data will be used in
+        future developments!
       </p>
     </div>
   </div>
@@ -36,16 +33,20 @@
   <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
-      <h3 class="m-3 text-center">Recent Event Records</h3>
+      <h3 class="m-3 text-center">Event Records for {{ records[0].player_name }}</h3>
     </div>
   </div>
   <!-- ---------------CONTENT JINJA LOOP---------------  -->
   {% set count = namespace(value=0) %} {% for record in records %}
-  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
-  <div class="row d-md-none">
+  <!-- ---------------MEDIUM- SCREEN TABLE ROWS---------------  -->
+  <div class="row d-lg-none">
     <div class="col-12">
-      <div class="container border my-1 event-seperator">
+      <div class="container border my-2 event-seperator">
         <table class="my-2 text-center">
+        <tr>
+            <th>Event Status</th>
+            <td>{{record.event_status}}</td>
+          </tr>
           <tr>
             <th>Player</th>
             <td>{{record.player_name}}</td>
@@ -65,6 +66,10 @@
           <tr>
             <th>Record</th>
             <td>{{ record.final_record }}</td>
+          </tr>
+          <tr>
+            <th>Game Win %</th>
+            <td>{{ record.gamewin_perc }}</td>
           </tr>
         </table>
         <p class="text-center my-2">
@@ -86,10 +91,10 @@
             >
               <div class="card card-body">
                 {% for rounds in record.event_rounds %}
-                <table class="d-md-none text-center">
+                <table class="d-lg-none text-center">
                   <tr>
                     <th class="small-th">Round</th>
-                    <td class="small-td">{{ rounds.round_no }}</td>
+                    <td class="small-td">{{ rounds.round }}</td>
                   </tr>
                   <tr>
                     <th class="small-th">Vs</th>
@@ -112,17 +117,14 @@
                     <td class="small-td">{{ rounds.games_lost }}</td>
                   </tr>
                 </table>
-                <hr class="d-md-none" />
+                <hr class="d-lg-none" />
                 {% endfor %}
                 <div class="row text-center">
                   <div class="col-12 my-3">
-                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
                   </div>
                   <div class="col-12 my-3">
-                    <input
-                      class="btn btn-warning m-auto"
-                      value="Delete Record"
-                    />
+                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
                   </div>
                 </div>
               </div>
@@ -132,10 +134,18 @@
       </div>
     </div>
   </div>
-  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
-  <div class="row d-none d-md-block">
+  <!-- ---------------LG+ SCREEN TABLE ROWS--------------- -->
+  <div class="row d-none d-lg-block">
     <div class="col-12">
-      <div class="container border my-1 event-seperator">
+      <div class="container border my-2 event-seperator">
+      <div class="row">
+      <div class="col-6 text-right">
+        <p><span class="font-weight-bold">Event Status:</span></p>
+        </div>
+        <div class="col-6 text-left">
+        <p>{{record.event_status}}</p>
+        </div>
+      </div>
         <table class="text-center m-auto main-table">
           <tr>
             <th class="med-th">Player</th>
@@ -143,6 +153,7 @@
             <th class="med-th">Deck</th>
             <th class="med-th">Date</th>
             <th class="med-th">Record</th>
+            <th class="med-th">Game Win %</th>
           </tr>
           <tr>
             <td class="med-td">{{record.player_name}}</td>
@@ -150,6 +161,7 @@
             <td class="med-td">{{record.deck_name}}</td>
             <td class="med-td">{{ record.event_date }}</td>
             <td class="med-td">{{ record.final_record }}</td>
+            <td class="med-td">{{ record.gamewin_perc }}</td>
           </tr>
         </table>
         <p class="text-center my-2">
@@ -194,13 +206,10 @@
                 </table>
                 <div class="row text-center">
                   <div class="col-6 my-3">
-                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
                   </div>
                   <div class="col-6 my-3">
-                    <input
-                      class="btn btn-warning m-auto"
-                      value="Delete Record"
-                    />
+                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
                   </div>
                 </div>
               </div>

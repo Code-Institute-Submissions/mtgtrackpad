@@ -8,13 +8,18 @@
       <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
     </div>
   </div>
+    <div class="row">
+  <div class="col-12">
+  {% for message in get_flashed_messages() %}
+        <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+  </div>
   <!-- ---------------INTRO ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
-        MTG Trackpad is designed as an open data port for you to record you
-        event records as you play MTG. This is much like how your record was
-        tracked by the old DCI methods, except for manual input.
+        MTG Trackpad is designed as an open data port for you to record your own magic the gathering league data. A league is a string of 5 games played with the same deck. You don't have to play the games Sequentially. The Trackpad allows you to save rounds periodically and update the league information as and when you can!
       </p>
     </div>
   </div>
@@ -23,7 +28,7 @@
     <div class="col-12">
       <p class="m-3 text-center">
         Please take a look around and when you're ready, record your first event
-        or run of games on MTG Trackpad via the New Record link within the
+        or run of games on MTG Trackpad via the New Event Record link within the
         navigation bar
       </p>
     </div>
@@ -41,11 +46,15 @@
   </div>
   <!-- ---------------CONTENT JINJA LOOP---------------  -->
   {% set count = namespace(value=0) %} {% for record in records %}
-  <!-- ---------------SMALL SCREEN TABLE ROWS---------------  -->
-  <div class="row d-md-none">
+  <!-- ---------------MEDIUM- SCREEN TABLE ROWS---------------  -->
+  <div class="row d-lg-none">
     <div class="col-12">
-      <div class="container border my-1 event-seperator">
+      <div class="container border my-2 event-seperator">
         <table class="my-2 text-center">
+        <tr>
+            <th>Event Status</th>
+            <td>{{record.event_status}}</td>
+          </tr>
           <tr>
             <th>Player</th>
             <td>{{record.player_name}}</td>
@@ -65,6 +74,10 @@
           <tr>
             <th>Record</th>
             <td>{{ record.final_record }}</td>
+          </tr>
+          <tr>
+            <th>Game Win %</th>
+            <td>{{ record.gamewin_perc }}</td>
           </tr>
         </table>
         <p class="text-center my-2">
@@ -86,10 +99,10 @@
             >
               <div class="card card-body">
                 {% for rounds in record.event_rounds %}
-                <table class="d-md-none text-center">
+                <table class="d-lg-none text-center">
                   <tr>
                     <th class="small-th">Round</th>
-                    <td class="small-td">{{ rounds.round_no }}</td>
+                    <td class="small-td">{{ rounds.round }}</td>
                   </tr>
                   <tr>
                     <th class="small-th">Vs</th>
@@ -112,17 +125,14 @@
                     <td class="small-td">{{ rounds.games_lost }}</td>
                   </tr>
                 </table>
-                <hr class="d-md-none" />
+                <hr class="d-lg-none" />
                 {% endfor %}
                 <div class="row text-center">
                   <div class="col-12 my-3">
-                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
                   </div>
                   <div class="col-12 my-3">
-                    <input
-                      class="btn btn-warning m-auto"
-                      value="Delete Record"
-                    />
+                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
                   </div>
                 </div>
               </div>
@@ -132,10 +142,18 @@
       </div>
     </div>
   </div>
-  <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
-  <div class="row d-none d-md-block">
+  <!-- ---------------LG+ SCREEN TABLE ROWS--------------- -->
+  <div class="row d-none d-lg-block">
     <div class="col-12">
-      <div class="container border my-1 event-seperator">
+      <div class="container border my-2 event-seperator">
+      <div class="row">
+      <div class="col-6 text-right">
+        <p><span class="font-weight-bold">Event Status:</span></p>
+        </div>
+        <div class="col-6 text-left">
+        <p>{{record.event_status}}</p>
+        </div>
+      </div>
         <table class="text-center m-auto main-table">
           <tr>
             <th class="med-th">Player</th>
@@ -143,6 +161,7 @@
             <th class="med-th">Deck</th>
             <th class="med-th">Date</th>
             <th class="med-th">Record</th>
+            <th class="med-th">Game Win %</th>
           </tr>
           <tr>
             <td class="med-td">{{record.player_name}}</td>
@@ -150,6 +169,7 @@
             <td class="med-td">{{record.deck_name}}</td>
             <td class="med-td">{{ record.event_date }}</td>
             <td class="med-td">{{ record.final_record }}</td>
+            <td class="med-td">{{ record.gamewin_perc }}</td>
           </tr>
         </table>
         <p class="text-center my-2">
@@ -194,13 +214,10 @@
                 </table>
                 <div class="row text-center">
                   <div class="col-6 my-3">
-                    <input class="btn btn-primary m-auto" value="Edit Record" />
+                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
                   </div>
                   <div class="col-6 my-3">
-                    <input
-                      class="btn btn-warning m-auto"
-                      value="Delete Record"
-                    />
+                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
                   </div>
                 </div>
               </div>

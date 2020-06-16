@@ -25,6 +25,8 @@ $(document).ready(function () {
       res = "won";
     } else if ($("#first_w").val() == 1 && $("#first_l").val() == 1) {
       res = "draw";
+    } else if ($("#first_w").val() == '' && $("#first_l").val() == '') {
+        res1 ="undefined";
     } else {
       res = "loss";
     }
@@ -36,6 +38,8 @@ $(document).ready(function () {
       res2 = "won";
     } else if ($("#second_w").val() == 1 && $("#second_l").val() == 1) {
       res2 = "draw";
+    } else if ($("#second_w").val() == '' && $("#second_l").val() == '') {
+        res2 ="undefined";
     } else {
       res2 = "loss";
     }
@@ -47,6 +51,8 @@ $(document).ready(function () {
       res3 = "won";
     } else if ($("#third_w").val() == 1 && $("#third_l").val() == 1) {
       res3 = "draw";
+    } else if ($("#third_w").val() == '' && $("#third_l").val() == '') {
+        res3 ="undefined";
     } else {
       res3 = "loss";
     }
@@ -58,6 +64,8 @@ $(document).ready(function () {
       res4 = "won";
     } else if ($("#fourth_w").val() == 1 && $("#fourth_l").val() == 1) {
       res4 = "draw";
+    } else if ($("#fourth_w").val() == '' && $("#fourth_l").val() == '') {
+        res4 ="undefined";
     } else {
       res4 = "loss";
     }
@@ -69,11 +77,14 @@ $(document).ready(function () {
       res5 = "won";
     } else if ($("#fifth_w").val() == 1 && $("#fifth_l").val() == 1) {
       res5 = "draw";
+    } else if ($("#fifth_w").val() == '' && $("#fifth_l").val() == '') {
+        res5 ="undefined";
     } else {
       res5 = "loss";
     }
 
     results.push(res, res2, res3, res4, res5);
+    console.log(results);
 
     var wontarget = "won";
     var drawtarget = "draw";

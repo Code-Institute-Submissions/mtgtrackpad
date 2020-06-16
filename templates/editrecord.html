@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+{% extends 'base.html' %} {% block content %}
+<!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
+<div class="container">
+  <!-- ---------------TITLE ROW---------------  -->
+  <div class="row">
+    <div class="col-12">
+      <h3 class="m-3 text-center">Update Event Record</h3>
+    </div>
+  </div>
+</div>
+<hr />
+
+<!-- ---------------USER DATA FORM---------------  -->
+<form
+  id="neweventform"
+  class="p-3"
+  method="POST"
+  action="{{url_for('update_record', record_id=record._id)}}"
+  onkeydown="return event.key != 'Enter';"
+>
+  <!-- ---------------JQUERY CALC CONTAINER---------------  -->
+  <div
+    class="modal fade"
+    id="exampleModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Event Information</h5>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                {{ formX.eventstatusinput.label }} {{
+                formX.eventstatusinput(readonly=true) }}
+              </div>
+              <div class="col-12">
+                {{ formX.eventrecordinput.label }} {{
+                formX.eventrecordinput(readonly=true) }}
+              </div>
+              <div class="col-12">
+                {{ formX.eventgamewin.label }} {{
+                formX.eventgamewin(readonly=true) }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+        <input
+            type="submit"
+            class="btn btn-primary"
+            value="Save Event Record"
+          />
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------USER DATA CONTAINER---------------  -->
+  <div class="container-fluid p-3">
+    <!-- ---------------USER DATA FORM RESPONSIVE ROW---------------  -->
+    <div class="p-2 box_form">
+      <div class="row text-center">
+        <div class="col-12 col-md-3">
+          {{ formX.player_name.label }} {{ formX.player_name(value=record.player_name) }}
+        </div>
+        <div class="col-12 col-md-3">
+          {{ formX.mtgformat.label }} {{ formX.mtgformat(value=record.mtgformat) }}
+        </div>
+        <div class="col-12 col-md-3">
+          {{ formX.deck_name.label }} {{ formX.deck_name(value=record.deck_name) }}
+        </div>
+        <div class="col-12 col-md-3">
+          {{ formX.event_date.label }} {{ formX.event_date(value=record.event_date) }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------ROUND DATA CONTAINER---------------  -->
+  <div id="recordsubform" class="sub-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 p-2">
+          <div class="p-2 box_form">
+            <!-- ---------------TITLE COLUMN---------------  -->
+            <div class="col-12 text-center">
+              <h6>Event Round 1</h6>
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_oppname.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_oppname(value=record.event_rounds[0].opp_name) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_oppdeck.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_oppdeck(value=record.event_rounds[0].opp_deck) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_w.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_w(class_="wonnumber boxnumber", value=record.event_rounds[0].games_won) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_d.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_d(class_="boxnumber", value=record.event_rounds[0].games_drawn) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_l.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.first_l(class_='boxnumber', value=record.event_rounds[0].games_lost) }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-2">
+          <div class="p-2 box_form">
+            <!-- ---------------TITLE COLUMN---------------  -->
+            <div class="col-12 text-center">
+              <h6>Event Round 2</h6>
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_oppname.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_oppname(class_='form_box', value=record.event_rounds[1].opp_name) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_oppdeck.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_oppdeck(class_='form_box', value=record.event_rounds[1].opp_deck) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_w.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_w(class_=" form_box wonnumber boxnumber", value=record.event_rounds[1].games_won) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_d.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_d(class_=" form_box boxnumber", value=record.event_rounds[1].games_drawn) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_l.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.second_l(class_=' form_box boxnumber', value=record.event_rounds[1].games_lost) }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-2">
+          <div class="p-2 box_form">
+            <!-- ---------------TITLE COLUMN---------------  -->
+            <div class="col-12 text-center">
+              <h6>Event Round 3</h6>
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_oppname.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_oppname(class_='form_box', value=record.event_rounds[2].opp_name) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_oppdeck.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_oppdeck(class_='form_box', value=record.event_rounds[2].opp_deck) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_w.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_w(class_="form_box wonnumber boxnumber", value=record.event_rounds[2].games_won) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_d.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_d(class_="form_box boxnumber", value=record.event_rounds[2].games_drawn) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_l.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.third_l(class_='form_box boxnumber', value=record.event_rounds[2].games_lost) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 offset-md-2 col-md-4 p-2">
+          <div class="p-2 box_form">
+            <!-- ---------------TITLE COLUMN---------------  -->
+            <div class="col-12 text-center">
+              <h6>Event Round 4</h6>
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_oppname.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_oppname(class_='form_box', value=record.event_rounds[3].opp_name) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_oppdeck.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_oppdeck(class_='form_box', value=record.event_rounds[3].opp_deck) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_w.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_w(class_=" form_box wonnumber boxnumber", value=record.event_rounds[3].games_won) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_d.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_d(class_=" form_box boxnumber", value=record.event_rounds[3].games_drawn) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_l.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fourth_l(class_='form_box boxnumber', value=record.event_rounds[3].games_lost) }}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 p-2">
+          <div class="p-2 box_form">
+            <!-- ---------------TITLE COLUMN---------------  -->
+            <div class="col-12 text-center">
+              <h6>Event Round 5</h6>
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_oppname.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_oppname(class_='form_box', value=record.event_rounds[4].opp_name) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_oppdeck.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_oppdeck(class_='form_box', value=record.event_rounds[4].opp_deck) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_w.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_w(class_="form_box wonnumber boxnumber", value=record.event_rounds[4].games_won) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_d.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_d(class_="form_box boxnumber", value=record.event_rounds[4].games_drawn) }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_l.label }}
+            </div>
+            <div class="col-12 text-center">
+              {{ formX.fifth_l(class_='form_box boxnumber', value=record.event_rounds[4].games_lost) }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ---------------FORM BUTTONS CONTAINER---------------  -->
+  <div class="container-fluid my-3 text-center">
+    <div class="row text-center">
+      <div class="col-12 col-md-4 my-2 mx-auto">
+        <button
+        type="button"
+        class="btn btn-primary check-fields"
+        data-toggle="modal"
+        data-target="#exampleModal"
+      >
+        Calculate Event Results
+      </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+{% endblock %}
