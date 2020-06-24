@@ -7,9 +7,10 @@ html, body {
     margin: 0px;
 }
 
-body {
-    background-color: rgb(242, 248, 248);
+.event-seperator {
+    border: 1px solid grey;
 }
+
 
 input {
   padding: 0.2em; 
@@ -53,12 +54,13 @@ table {
 
 .med-td, .med-th {
     width: auto;
-    border-left: 50px solid rgb(212, 216, 212);
+    border-left: 50px solid rgba(0, 0, 0, 0);
+    
 }
 
 .sub-td, .sub-th {
     width: auto;
-    border-left: 50px solid #FFF;
+    border-left: 50px solid rgba(0, 0, 0, 0);
 }
 
 .sub-table {
@@ -71,11 +73,6 @@ table {
     align-content: center;
 }
 
-.event-seperator {
-    background-color: rgb(212, 216, 212);
-    border-radius: 5px;
-    
-}
 
 .foot-container {
     background-color: #f8f9fa!important;
@@ -104,4 +101,16 @@ table {
       align-content: center;
   }
   }
+
+.card-border {
+    border: 0 solid grey;
+    border-radius: 0;
+    background-color: rgb(252, 245, 232);
 }
+
+
+.neon {
+	color: #ffc107;
+	text-shadow: 0 0 2px #ffffff, 0 0 15px #ffde7a, 0 0 20px #fdce41, 0 0 40px #ffc107;
+}
+

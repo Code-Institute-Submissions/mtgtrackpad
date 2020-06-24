@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 {% extends 'base.html'%} {% block content %}
 <!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
-<div class="container">
+<div class="container cta">
   <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
-      <h3 class="m-3 text-center">Welcome to MTG Trackpad</h3>
+      <h3 class="m-3 text-center neon">Welcome to MTG Trackpad</h3>
     </div>
   </div>
-    <div class="row">
-  <div class="col-12">
-  {% for message in get_flashed_messages() %}
-        <p>{{ message }}</p>
-    {% endfor %}
-  </div>
+  <div class="row">
+    <div class="col-12">
+      {% for message in get_flashed_messages() %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
   </div>
   <!-- ---------------INTRO ROW---------------  -->
   <div class="row">
     <div class="col-12">
       <p class="m-3 text-center">
-        MTG Trackpad is designed as an open data port for you to record your own magic the gathering league data. A league is a string of 5 games played with the same deck. You don't have to play the games Sequentially. The Trackpad allows you to save rounds periodically and update the league information as and when you can!
+        MTG Trackpad is designed as an open data port for you to record your own
+        magic the gathering league data. A league is a string of 5 games played
+        with the same deck. You don't have to play the games Sequentially. The
+        Trackpad allows you to save rounds periodically and update the league
+        information as and when you can!
       </p>
     </div>
   </div>
@@ -35,13 +39,22 @@
   </div>
 </div>
 <!-- ---------------ADVERT CONTAINER---------------  -->
-<div class="container"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+        <a href="https://magic.wizards.com/en/products/core2021?source=MX_Nav2020">
+            <img class="img-fluid rounded-pill border border-warning" src="/static/images/core-2021-banner.jpg" alt="Core 2021 Teferi Advert">
+        </a>
+    </div>
+  </div>
+</div>
+<hr>
 <!-- ---------------RECENT RECORDS CONTAINER---------------  -->
 <div class="container">
   <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
-      <h3 class="m-3 text-center">Recent Event Records</h3>
+      <h4 class="m-3 text-center neon">Recent Event Records</h4>
     </div>
   </div>
   <!-- ---------------CONTENT JINJA LOOP---------------  -->
@@ -49,9 +62,9 @@
   <!-- ---------------MEDIUM- SCREEN TABLE ROWS---------------  -->
   <div class="row d-lg-none">
     <div class="col-12">
-      <div class="container border my-2 event-seperator">
+      <div class="container my-2 event-seperator">
         <table class="my-2 text-center">
-        <tr>
+          <tr>
             <th>Event Status</th>
             <td>{{record.event_status}}</td>
           </tr>
@@ -82,7 +95,7 @@
         </table>
         <p class="text-center my-2">
           <a
-            class="btn btn-success more-deets"
+            class="btn btn-warning more-deets"
             data-toggle="collapse"
             href="#multiCollapseExample{{ count.value }}"
             role="button"
@@ -129,10 +142,18 @@
                 {% endfor %}
                 <div class="row text-center">
                   <div class="col-12 my-3">
-                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
+                    <a
+                      href="{{url_for('edit_record', record_id=record._id)}}"
+                      class="btn btn-info m-auto"
+                      >Update Record</a
+                    >
                   </div>
                   <div class="col-12 my-3">
-                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
+                    <a
+                      href="{{url_for('remove_record', record_id=record._id)}}"
+                      class="btn btn-danger m-auto"
+                      >Remove Record</a
+                    >
                   </div>
                 </div>
               </div>
@@ -145,15 +166,15 @@
   <!-- ---------------LG+ SCREEN TABLE ROWS--------------- -->
   <div class="row d-none d-lg-block">
     <div class="col-12">
-      <div class="container border my-2 event-seperator">
-      <div class="row">
-      <div class="col-6 text-right">
-        <p><span class="font-weight-bold">Event Status:</span></p>
+      <div class="container my-2 event-seperator">
+        <div class="row">
+          <div class="col-6 text-right">
+            <p><span class="font-weight-bold">Event Status:</span></p>
+          </div>
+          <div class="col-6 text-left">
+            <p>{{record.event_status}}</p>
+          </div>
         </div>
-        <div class="col-6 text-left">
-        <p>{{record.event_status}}</p>
-        </div>
-      </div>
         <table class="text-center m-auto main-table">
           <tr>
             <th class="med-th">Player</th>
@@ -174,7 +195,7 @@
         </table>
         <p class="text-center my-2">
           <a
-            class="btn btn-success more-deets"
+            class="btn btn-warning more-deets"
             data-toggle="collapse"
             href="#multiCollapseExample{{ count.value }}"
             role="button"
@@ -186,10 +207,10 @@
         <div class="row">
           <div class="col">
             <div
-              class="collapse multi-collapse my-2"
+              class="collapse multi-collapse my-3"
               id="multiCollapseExample{{ count.value }}"
             >
-              <div class="card card-body">
+              <div class="shadow card card-body card-border">
                 <table class="text-center m-auto sub-table">
                   <tbody>
                     <tr>
@@ -214,10 +235,18 @@
                 </table>
                 <div class="row text-center">
                   <div class="col-6 my-3">
-                    <a href="{{url_for('edit_record', record_id=record._id)}}" class="btn btn-info m-auto">Update Record</a>
+                    <a
+                      href="{{url_for('edit_record', record_id=record._id)}}"
+                      class="btn btn-info m-auto"
+                      >Update Record</a
+                    >
                   </div>
                   <div class="col-6 my-3">
-                    <a href="{{url_for('remove_record', record_id=record._id)}}" class="btn btn-warning m-auto">Remove Record</a>
+                    <a
+                      href="{{url_for('remove_record', record_id=record._id)}}"
+                      class="btn btn-danger m-auto"
+                      >Remove Record</a
+                    >
                   </div>
                 </div>
               </div>

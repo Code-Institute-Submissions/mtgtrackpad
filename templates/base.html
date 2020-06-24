@@ -23,7 +23,8 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- ----------Collapse Nav---------- -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow">
       <button
         class="navbar-toggler"
         type="button"
@@ -35,20 +36,20 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="{{url_for('homepage')}}">The MTG Trackpad</a>
+      <a class="navbar-brand text-dark" href="{{url_for('homepage')}}">The MTG Trackpad</a>
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav ml-auto mr-2 mt-2 mt-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="{{url_for('new_record')}}"
+            <a class="nav-link text-dark" href="{{url_for('new_record')}}"
               >New Event Record<span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Coming Soon!
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
           <a class="dropdown-item disabled" href="#">Player Insights!</a>
           <a class="dropdown-item disabled" href="#">Format Insights!</a>
         </div>
@@ -63,7 +64,7 @@
             aria-label="Search"
             name="playername"
           />
-          <a id="playerhistory" class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          <a id="playerhistory" class="btn btn-dark text-warning my-2 my-sm-0" type="submit">
             Search
           </a>
         </form>
@@ -71,11 +72,12 @@
     </nav>
 
     <hr class="mt-0 mb-1 nav_ruler" />
-
+    <!-- ----------Template Block Content---------- -->
     {% block content %} {% endblock %}
     <hr class="mt-1 mb-0 nav_ruler" />
+    <!-- ----------Footer---------- -->
     <footer class="foot-container">
-        <div class="row p-3">
+        <div class="text-white bg-dark row p-3">
           <div class="col-12 col-md-4 text-center">
             <h6>Milestone Projects</h6>
             <p><a href="#">Milestone 1: MtG Art Blog</a></p>
@@ -94,6 +96,7 @@
           </div>
         </div>
     </footer>
+    <!-- ----------JS CDNs---------- -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.js"
       integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
@@ -109,6 +112,7 @@
       integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
       crossorigin="anonymous"
     ></script>
+    <!-- ----------Static JS---------- -->
     <script src="{{url_for('static', filename='js/script.js', type='text/javascript')}}"></script>
   </body>
 </html>

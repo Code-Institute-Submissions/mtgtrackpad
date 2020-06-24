@@ -22,6 +22,7 @@ app.config['SECRET_KEY'] = os.environ.get("SECRET_KEYs")
 mongo = PyMongo(app)
 
 
+# HomePage
 @app.route('/')
 @app.route('/homepage')
 def homepage():
@@ -29,21 +30,26 @@ def homepage():
     return render_template("homepage.html", records=records)
 
 
+# Player History search, value invoked by JQuery function via input field
 @app.route('/player_history/<player_id>', methods=['GET', 'POST'])
 def player_history(player_id):
     records = mongo.db.Player_Records.find({"player_name": player_id}).sort('_id', -1)
+    # redirect for if input value returns no data
     if records.count() == 0:
         flash('This player does not exist in our data. Please try again.')
         return redirect(url_for('homepage'))
+    # if data is found, return to playerhistory page with player's data
     return render_template("playerhistory.html", records=records)
 
 
+# New record route to record new data
 @app.route('/new_record', methods=['GET', 'POST'])
 def new_record():
     formX = NewEvent()
     return render_template('newrecord.html', formX=formX)
 
 
+# Static form that allows to recording of 5 game rounds
 @app.route('/add_record', methods=['POST'])
 def add_record():
     newrecord = mongo.db.Player_Records
@@ -94,6 +100,7 @@ def add_record():
                 'games_lost': request.form.get('fifth_l')
             }
         ],
+        # Inputs are JQuery generated. A function is called to calc them into uneditable input fields
         'final_record': request.form.get('eventrecordinput'),
         'gamewin_perc': request.form.get('eventgamewin'),
         'event_status': request.form.get('eventstatusinput')
@@ -102,6 +109,7 @@ def add_record():
     return redirect(url_for('homepage'))
 
 
+# Edit a record based on _id
 @app.route('/edit_record/<record_id>')
 def edit_record(record_id):
     formX = NewEvent()
@@ -109,6 +117,7 @@ def edit_record(record_id):
     return render_template('editrecord.html', record=record, formX=formX)
 
 
+# Update a record based on _id
 @app.route('/update_record/<record_id>', methods=['POST'])
 def update_record(record_id):
     records = mongo.db.Player_Records
@@ -159,6 +168,7 @@ def update_record(record_id):
                 'games_lost': request.form.get('fifth_l')
             }
         ],
+        # Jquery function calcs these inputs as uneditable fields
         'final_record': request.form.get('eventrecordinput'),
         'gamewin_perc': request.form.get('eventgamewin'),
         'event_status': request.form.get('eventstatusinput')})
@@ -166,6 +176,7 @@ def update_record(record_id):
     return redirect(url_for('homepage'))
 
 
+# Deletes a record from the data base
 @app.route('/remove_record/<record_id>')
 def remove_record(record_id):
     mongo.db.Player_Records.remove({'_id': ObjectId(record_id)})
