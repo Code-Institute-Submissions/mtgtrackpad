@@ -114,3 +114,20 @@ table {
 	text-shadow: 0 0 2px #ffffff, 0 0 15px #ffde7a, 0 0 20px #fdce41, 0 0 40px #ffc107;
 }
 
+.footer-title {
+    color: rgba(255,193,7,1)
+}
+
+.footer-anchor {
+    color: rgb(252, 216, 109)
+}
+
+.footer-anchor:hover, .cta-link:hover {
+    text-decoration: none;
+    color: #ffc107;
+	text-shadow: 0 0 2px #ffffff, 0 0 15px #ffde7a, 0 0 20px #fdce41, 0 0 40px #ffc107;
+}
+
+.cta-link {
+    color: rgba(255,193,7,1)
+}

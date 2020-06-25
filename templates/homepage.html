@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends 'base.html'%} {% block content %}
 <!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
-<div class="container cta">
+<div class="container">
   <!-- ---------------TITLE ROW---------------  -->
   <div class="row">
     <div class="col-12">
@@ -21,7 +21,7 @@
       <p class="m-3 text-center">
         MTG Trackpad is designed as an open data port for you to record your own
         magic the gathering league data. A league is a string of 5 games played
-        with the same deck. You don't have to play the games Sequentially. The
+        with the same deck. You don't have to play the games sequentially. The
         Trackpad allows you to save rounds periodically and update the league
         information as and when you can!
       </p>
@@ -32,8 +32,7 @@
     <div class="col-12">
       <p class="m-3 text-center">
         Please take a look around and when you're ready, record your first event
-        or run of games on MTG Trackpad via the New Event Record link within the
-        navigation bar
+        or run of games on MTG Trackpad <a class="cta-link font-weight-bold" href="{{url_for('new_record')}}">here!</a>
       </p>
     </div>
   </div>
@@ -42,7 +41,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-        <a href="https://magic.wizards.com/en/products/core2021?source=MX_Nav2020">
+        <a href="https://magic.wizards.com/en/products/core2021?source=MX_Nav2020" target="_blank">
             <img class="img-fluid rounded-pill border border-warning" src="/static/images/core-2021-banner.jpg" alt="Core 2021 Teferi Advert">
         </a>
     </div>
@@ -58,7 +57,7 @@
     </div>
   </div>
   <!-- ---------------CONTENT JINJA LOOP---------------  -->
-  {% set count = namespace(value=0) %} {% for record in records %}
+  {% set count = namespace(value=0) %}{% for record in records %}
   <!-- ---------------MEDIUM- SCREEN TABLE ROWS---------------  -->
   <div class="row d-lg-none">
     <div class="col-12">
@@ -97,20 +96,20 @@
           <a
             class="btn btn-warning more-deets"
             data-toggle="collapse"
-            href="#multiCollapseExample{{ count.value }}"
+            href="#mediumCollapse{{ count.value }}"
             role="button"
             aria-expanded="false"
-            aria-controls="multiCollapseExample{{ count.value }}"
+            aria-controls="mediumCollapse{{ count.value }}"
             ><i class="fa fa-caret-down"></i
           ></a>
         </p>
         <div class="row">
           <div class="col">
             <div
-              class="collapse multi-collapse my-2"
-              id="multiCollapseExample{{ count.value }}"
+              class="collapse multi-collapse my-3"
+              id="mediumCollapse{{ count.value }}"
             >
-              <div class="card card-body">
+              <div class="shadow card card-body card-border">
                 {% for rounds in record.event_rounds %}
                 <table class="d-lg-none text-center">
                   <tr>
@@ -197,10 +196,10 @@
           <a
             class="btn btn-warning more-deets"
             data-toggle="collapse"
-            href="#multiCollapseExample{{ count.value }}"
+            href="#largeCollapse{{ count.value }}"
             role="button"
             aria-expanded="false"
-            aria-controls="multiCollapseExample{{ count.value }}"
+            aria-controls="largeCollapse{{ count.value }}"
             ><i class="fa fa-caret-down"></i
           ></a>
         </p>
@@ -208,7 +207,7 @@
           <div class="col">
             <div
               class="collapse multi-collapse my-3"
-              id="multiCollapseExample{{ count.value }}"
+              id="largeCollapse{{ count.value }}"
             >
               <div class="shadow card card-body card-border">
                 <table class="text-center m-auto sub-table">
@@ -256,7 +255,7 @@
       </div>
     </div>
   </div>
-  {% set count.value = count.value + 1 %} {% endfor %}
+ {% set count.value = count.value + 1 %} {% endfor %}
   <!-- ---------------MEDIUM+ SCREEN TABLE ROWS--------------- -->
 </div>
 {% endblock %}
