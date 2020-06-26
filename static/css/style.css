@@ -46,12 +46,6 @@ table {
     width: 100%;
 }
 
-.box_form {
-    border-radius: 5px;
-    border: solid 1px black;
-    background-color:cornflowerblue;
-}
-
 .med-td, .med-th {
     width: auto;
     border-left: 50px solid rgba(0, 0, 0, 0);
@@ -102,7 +96,13 @@ table {
   }
   }
 
-.card-border {
+.card-border, .box_form {
+    border: 0 solid grey;
+    border-radius: 0;
+    background-color: rgb(252, 245, 232);
+}
+
+.dropdown-menu {
     border: 0 solid grey;
     border-radius: 0;
     background-color: rgb(252, 245, 232);
@@ -131,3 +131,45 @@ table {
 .cta-link {
     color: rgba(255,193,7,1)
 }
+
+.golden {
+	background: -webkit-linear-gradient(top,  #f9d400 15%,#f89b00 35%,#f9d400 70%); /* Chrome10+,Safari5.1+ */
+	-webkit-background-clip:text;
+	-webkit-text-fill-color:transparent;
+}
+
+.smokey {
+    background-color: rgba(52,58,54,1);
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px 15px rgba(52,58,54,1);
+}
+
+.shadow-text {
+    text-shadow: 2px 2px 0px rgba(52,58,54,1);
+}
+
+
+.nav-background {
+    background-image: linear-gradient(to left, rgba(52,58,54,1) , rgba(255,193,7,1));
+}
+
+@media only screen and (min-width: 769px) {
+  .nav-background {
+      background-image: linear-gradient(to right, rgba(52,58,54,1) , rgba(255,193,7,1));
+  }
+  }
+
+.nav-hover {
+    color: rbga(52,58,54,1);
+}
+
+
+  .nav-hover:hover {
+      color: white !important;
+      text-shadow: 0px 0px 20px rgb(0, 0, 0), 0px 0px 15px rgb(0, 0, 0), 0px 0px 10px rgb(0, 0, 0);
+  }
+
+  .modal-header, .modal-footer {
+      border: none;
+      border-radius: none;
+  }

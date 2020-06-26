@@ -3,7 +3,7 @@ from flask import Flask, render_template, redirect, url_for, request, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
 from wtforms.fields.html5 import DateField
-from forms import NewEvent
+from forms import new_event_form
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from os import path
@@ -31,9 +31,9 @@ def homepage():
 
 
 # Player History search, value invoked by JQuery function via input field
-@app.route('/player_history/<player_id>', methods=['GET', 'POST'])
-def player_history(player_id):
-    records = mongo.db.Player_Records.find({"player_name": player_id}).sort('_id', -1)
+@app.route('/player_history/<player_name>', methods=['GET', 'POST'])
+def player_history(player_name):
+    records = mongo.db.Player_Records.find({"player_name": player_name}).sort('_id', -1)
     # redirect for if input value returns no data
     if records.count() == 0:
         flash('This player does not exist in our data. Please try again.')
@@ -45,8 +45,8 @@ def player_history(player_id):
 # New record route to record new data
 @app.route('/new_record', methods=['GET', 'POST'])
 def new_record():
-    formX = NewEvent()
-    return render_template('newrecord.html', formX=formX)
+    form = new_event_form()
+    return render_template('newrecord.html', form=form)
 
 
 # Static form that allows to recording of 5 game rounds
@@ -112,9 +112,9 @@ def add_record():
 # Edit a record based on _id
 @app.route('/edit_record/<record_id>')
 def edit_record(record_id):
-    formX = NewEvent()
+    form = new_event_form()
     record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
-    return render_template('editrecord.html', record=record, formX=formX)
+    return render_template('editrecord.html', record=record, form=form)
 
 
 # Update a record based on _id

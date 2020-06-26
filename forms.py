@@ -4,7 +4,7 @@ from wtforms.fields.html5 import DateField
 from wtforms.validators import InputRequired
 
 
-class NewEvent(FlaskForm):
+class new_event_form(FlaskForm):
     player_name = StringField('Your Name', validators=[InputRequired()])
     mtgformat = StringField('Format', validators=[InputRequired()])
     deck_name = StringField('Deck Name', validators=[InputRequired()])

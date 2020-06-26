@@ -24,7 +24,7 @@
 
   <body>
     <!-- ----------Collapse Nav---------- -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning shadow">
+    <nav class="navbar navbar-expand-lg navbar-light nav-background shadow">
       <button
         class="navbar-toggler"
         type="button"
@@ -36,23 +36,38 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand text-dark" href="{{url_for('homepage')}}">The MTG Trackpad</a>
-
+      <div class="text-center m-2">
+        <a class="navbar-brand text-dark golden m-1 " href="{{url_for('homepage')}}"
+          ><h3 class="mb-0">MTG Trackpad</h3></a
+        >
+      </div>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav ml-auto mr-2 mt-2 mt-lg-0">
           <li class="nav-item active">
-            <a class="nav-link text-dark" href="{{url_for('new_record')}}"
+            <a class="nav-link nav-hover" href="{{url_for('new_record')}}"
               >New Event Record<span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Coming Soon!
-        </a>
-        <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item disabled" href="#">Player Insights!</a>
-        </div>
-      </li>
+            <a
+              class="nav-link dropdown-toggle nav-hover"
+              href="#"
+              id="navbarDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Coming Soon!
+            </a>
+            <div
+              class="dropdown-menu shadow text-center"
+              aria-labelledby="navbarDropdown"
+            >
+              <a class="dropdown-item disabled" href="#">Player Insights!</a>
+              <a class="dropdown-item disabled" href="#">Draft Recorder!</a>
+            </div>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input
@@ -62,36 +77,78 @@
             placeholder="Search Player History"
             aria-label="Search"
             name="playername"
+            data-toggle="tooltip" data-placement="bottom" title="Exact player name required"
           />
-          <a id="playerhistory" class="btn btn-dark text-warning my-2 my-sm-0" type="submit">
+          <a
+            id="playerhistory"
+            class="btn btn-dark text-warning my-2 my-sm-0"
+            type="submit"
+            
+          >
             Search
           </a>
         </form>
       </div>
     </nav>
-    <hr class="mt-0 mb-1 nav_ruler" />
     <!-- ----------Template Block Content---------- -->
     {% block content %} {% endblock %}
-    <hr class="mt-1 mb-0 nav_ruler" />
+    <br>
+    <br>
+    <br>
     <!-- ----------Footer---------- -->
     <footer class="foot-container">
-        <div class="text-white bg-dark row p-3">
-          <div class="col-12 col-md-4 text-center">
-            <h6 class="footer-title">Milestone Projects</h6>
-            <p><a class="footer-anchor" href="https://jpmurdie.github.io/Milestone-Project-1-Art-Blog/" target="_blank">Milestone 1: MtG Art Blog</a></p>
-            <p><a class="footer-anchor" href="https://jpmurdie.github.io/Milestone-Project-2-Guess-the-Card/" target="_blank">Milestone 2: MtG Guess the Card Game</a></p>
-            <p><a class="footer-anchor" href="#">Milestone 3: MtG Trackpad</a></p>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <h6 class="footer-title">Other Information</h6>
-            <p><a class="footer-anchor" href="https://magic.wizards.com/en" target="_blank">MtG Homepage</a></p>
-            <p><a class="footer-anchor" href="https://magic.wizards.com/en/mtgarena" target="_blank">MtG Arena</a></p>
-          </div>
-          <div class="col-12 col-md-4 text-center">
-            <h6 class="footer-title">JPMurdie © 2020</h6>
-            <p><a class="footer-anchor" href="https://github.com/JPMurdie" target="_blank">Github Homepage</a></p>
-          </div>
+      <div class="text-white bg-dark row p-3">
+        <div class="col-12 col-md-4 text-center">
+          <h6 class="footer-title">Milestone Projects</h6>
+          <p>
+            <a
+              class="footer-anchor"
+              href="https://jpmurdie.github.io/Milestone-Project-1-Art-Blog/"
+              target="_blank"
+              >Milestone 1: MtG Art Blog</a
+            >
+          </p>
+          <p>
+            <a
+              class="footer-anchor"
+              href="https://jpmurdie.github.io/Milestone-Project-2-Guess-the-Card/"
+              target="_blank"
+              >Milestone 2: MtG Game: Flavour Points</a
+            >
+          </p>
+          <p><a class="footer-anchor" href="{{url_for('homepage')}}">Milestone 3: MtG Trackpad</a></p>
         </div>
+        <div class="col-12 col-md-4 text-center">
+          <h6 class="footer-title">Other Information</h6>
+          <p>
+            <a
+              class="footer-anchor"
+              href="https://magic.wizards.com/en"
+              target="_blank"
+              >MtG Homepage</a
+            >
+          </p>
+          <p>
+            <a
+              class="footer-anchor"
+              href="https://magic.wizards.com/en/mtgarena"
+              target="_blank"
+              >MtG Arena</a
+            >
+          </p>
+        </div>
+        <div class="col-12 col-md-4 text-center">
+          <h6 class="footer-title">JPMurdie © 2020</h6>
+          <p>
+            <a
+              class="footer-anchor"
+              href="https://github.com/JPMurdie"
+              target="_blank"
+              >Github Homepage</a
+            >
+          </p>
+        </div>
+      </div>
     </footer>
     <!-- ----------JS CDNs---------- -->
     <script
