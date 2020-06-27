@@ -178,6 +178,7 @@ def edit_record(record_id):
         return render_template('editrecord.html', record=record, form=form)
 
     try:
+        record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
         return render_template('editrecord.html', record=record, form=form)
     except Exception:
         flash("Record was not found!", "error")
