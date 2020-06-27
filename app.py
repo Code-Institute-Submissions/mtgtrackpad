@@ -118,7 +118,6 @@ def new_record():
 def edit_record(record_id):
     form = new_event_form()
     records = mongo.db.Player_Records
-    record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
     if request.method == 'POST':
         if form.validate_on_submit():
             records.update_one({'_id': ObjectId(record_id)},
@@ -175,6 +174,7 @@ def edit_record(record_id):
                                    'event_status': request.form.get('eventstatusinput')}})
             flash('Event record has been updated!')
             return redirect(url_for('homepage'))
+
         return render_template('editrecord.html', record=record, form=form)
 
     try:
@@ -183,6 +183,7 @@ def edit_record(record_id):
     except Exception:
         flash("Record was not found!", "error")
         return redirect(url_for('homepage'))
+
     return render_template('editrecord.html', record=record, form=form)
 
 
