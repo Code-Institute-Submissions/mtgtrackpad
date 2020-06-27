@@ -7,6 +7,10 @@ html, body {
     margin: 0px;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 .event-seperator {
     border: 1px solid grey;
 }
@@ -172,4 +176,36 @@ table {
   .modal-header, .modal-footer {
       border: none;
       border-radius: none;
+  }
+
+    .malfunction-text {
+        font-size: 1rem;
+    }
+
+
+  @media only screen and (min-width: 600px) {
+  .malfunction-text {
+     font-size: 2rem;
+  }
+  }
+
+  #malfunction {
+      height: auto;
+      width: auto;
+      margin-bottom: -100px;
+      background-image: url("/static/images/malfunction.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-blend-mode: overlay;
+      background-position: center;
+  }
+
+  #malfunction-text {
+      height: 500px;
+  }
+
+  .homeward-text {
+      background-color: rgba(52,58,54,1);
+      border: 1px solid rgba(255,193,7,1);
+      border-style: groove;
   }

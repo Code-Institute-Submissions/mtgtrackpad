@@ -24,8 +24,6 @@ mongo = PyMongo(app)
 
 
 # HomePage
-@app.route('/player_history')
-@app.route('/player_history/')
 @app.route('/')
 @app.route('/homepage')
 def homepage():
@@ -188,11 +186,26 @@ def edit_record(record_id):
 
 
 # Deletes a record from the data base
+@app.route('/remove_record')
+@app.route('/remove_record/')
 @app.route('/remove_record/<record_id>')
 def remove_record(record_id):
-    mongo.db.Player_Records.remove({'_id': ObjectId(record_id)})
+    try:
+        mongo.db.Player_Records.remove({'_id': ObjectId(record_id)})
+    except Exception:
+        flash("Record was not found!", "error")
+        return redirect(url_for('homepage'))
+
     flash('Event record has been deleted!')
     return redirect(url_for('homepage'))
+
+@app.errorhandler(404)
+def error404(error):
+    return redirect(url_for('errorpage404'))
+
+@app.route('/errorpage404')
+def errorpage404():
+    return render_template('error404.html')
 
 
 if __name__ == "__main__":
