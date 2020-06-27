@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField
 from wtforms.fields.html5 import DateField
-from wtforms.validators import InputRequired
+from wtforms.validators import InputRequired, Optional
 
 
 class new_event_form(FlaskForm):
@@ -9,7 +9,7 @@ class new_event_form(FlaskForm):
     mtgformat = StringField('Format', validators=[InputRequired()])
     deck_name = StringField('Deck Name', validators=[InputRequired()])
     event_date = DateField('Date', validators=[InputRequired()])
-    event_rounds = StringField('Round', validators=[InputRequired()])
+    event_rounds = IntegerField('Round')
     first_oppname = StringField('Opponent Name', validators=[InputRequired()])
     first_oppdeck = StringField('Deck Name', validators=[InputRequired()])
     first_w = IntegerField('Games Won', validators=[InputRequired()])
@@ -17,24 +17,24 @@ class new_event_form(FlaskForm):
     first_l = IntegerField('Games Lost', validators=[InputRequired()])
     second_oppname = StringField('Opponent Name')
     second_oppdeck = StringField('Deck Name')
-    second_w = IntegerField('Games Won')
-    second_d = IntegerField('Games Drawn')
-    second_l = IntegerField('Games Lost')
+    second_w = IntegerField('Games Won', validators=[Optional(strip_whitespace=True)])
+    second_d = IntegerField('Games Drawn', validators=[Optional(strip_whitespace=True)])
+    second_l = IntegerField('Games Lost', validators=[Optional(strip_whitespace=True)])
     third_oppname = StringField('Opponent Name')
     third_oppdeck = StringField('Deck Name')
-    third_w = IntegerField('Games Won')
-    third_d = IntegerField('Games Drawn')
-    third_l = IntegerField('Games Lost')
+    third_w = IntegerField('Games Won', validators=[Optional(strip_whitespace=True)])
+    third_d = IntegerField('Games Drawn', validators=[Optional(strip_whitespace=True)])
+    third_l = IntegerField('Games Lost', validators=[Optional(strip_whitespace=True)])
     fourth_oppname = StringField('Opponent Name')
     fourth_oppdeck = StringField('Deck Name')
-    fourth_w = IntegerField('Games Won')
-    fourth_d = IntegerField('Games Drawn')
-    fourth_l = IntegerField('Games Lost')
+    fourth_w = IntegerField('Games Won', validators=[Optional(strip_whitespace=True)])
+    fourth_d = IntegerField('Games Drawn', validators=[Optional(strip_whitespace=True)])
+    fourth_l = IntegerField('Games Lost', validators=[Optional(strip_whitespace=True)])
     fifth_oppname = StringField('Opponent Name')
     fifth_oppdeck = StringField('Deck Name')
-    fifth_w = IntegerField('Games Won')
-    fifth_d = IntegerField('Games Drawn')
-    fifth_l = IntegerField('Games Lost')
+    fifth_w = IntegerField('Games Won', validators=[Optional(strip_whitespace=True)])
+    fifth_d = IntegerField('Games Drawn', validators=[Optional(strip_whitespace=True)])
+    fifth_l = IntegerField('Games Lost', validators=[Optional(strip_whitespace=True)])
     eventstatusinput = StringField('Event Status:')
     eventrecordinput = StringField('Event Record (Win/Draw/Loss):')
     eventgamewin = StringField('Event Game Win %:')

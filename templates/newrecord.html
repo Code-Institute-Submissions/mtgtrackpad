@@ -9,15 +9,20 @@
     </div>
   </div>
 </div>
-
 <!-- ---------------USER DATA FORM---------------  -->
 <form
   id="neweventform"
   class="p-3"
   method="POST"
-  action="{{ url_for('add_record') }}"
+  action="{{ url_for('new_record') }}"
   onkeydown="return event.key != 'Enter';"
 >
+{{ form.csrf_token }}
+<ul>
+{% for errors in form.errors %}
+    <li style="color:red;">{{ errors }}</li>
+{% endfor %}
+</ul>
   <!-- ---------------JQUERY CALC CONTAINER---------------  -->
   <div
     class="modal fade"

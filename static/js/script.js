@@ -123,6 +123,9 @@ $(document).ready(function () {
 
   $("#playerhistory").on("click", function () {
       player_name = $("#playername").val()
+        if( player_name.length === 0 ) {
+            $('#myModal').modal('show');
+        } else {
       window.location.href = "/player_history/"+player_name
-  });
+  }});
 });
