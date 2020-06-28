@@ -2,34 +2,36 @@
 {% extends 'base.html'%} {% block content %}
 <!-- ---------------TITLE & INTRO/CTA CONTAINER---------------  -->
 <div class="container p-1">
-  <!-- ---------------TITLE ROW---------------  -->
-  <div class="row">
-    <div class="col-12 text-center">
-      <h2 class="m-2 text-center text-warning malfunction-text">Oops!</h2>
-    </div>
-  </div>
-  <div class="row m-1">
-    <div class="col-12 text-center">
-      <img
-        src="/static/images/Malfunction_KLD.png"
-        alt="Alien working on machine malfunction"
-      />
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 text-center">
-      <h2 class="mt-1 text-center text-dark malfunction-text">Error 404</h2>
-      <h2 class="m-2 text-center text-warning malfunction-text">
-        This page may be broken or it has been removed.
-      </h2>
-      <div class="div homeward-text">
-        <a class="text-center" href="{{url_for('homepage')}}"
-          ><h2 class="malfunction-text golden border p-2 m-0">
-            Back to Home
-          </h2></a
-        >
+   <!-- ---------------TITLE ROW---------------  -->
+   <div class="row">
+      <div class="col-12 text-center">
+         <h2 class="m-2 text-center text-warning malfunction-text">Oops!</h2>
       </div>
-    </div>
-  </div>
+   </div>
+   <div class="row m-1">
+      <div class="col-12 text-center">
+         <img
+            src="/static/images/Malfunction_KLD.png"
+            alt="Alien working on machine malfunction"
+            />
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-12 text-center">
+         <h2 class="mt-1 text-center text-dark malfunction-text">Error 404</h2>
+         <h2 class="m-2 text-center text-warning malfunction-text">
+            This page may be broken or it has been removed.
+         </h2>
+         <div class="div homeward-text">
+            <a class="text-center" href="{{url_for('homepage')}}"
+               >
+               <h2 class="malfunction-text golden border p-2 m-0">
+                  Back to Home
+               </h2>
+            </a
+               >
+         </div>
+      </div>
+   </div>
 </div>
 {% endblock %}

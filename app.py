@@ -57,6 +57,7 @@ def new_record():
             },
         )
     form = new_event_form()
+    formats = mongo.db.MtG_Formats.find()
     newrecord = mongo.db.Player_Records
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -76,9 +77,9 @@ def new_record():
             newrecord.insert_many(formdata)
             flash('Event record added!')
             return redirect(url_for('homepage'))
-        return render_template('newrecord.html', form=form)
+        return render_template('newrecord.html', form=form, formats=formats)
 
-    return render_template('newrecord.html', form=form)
+    return render_template('newrecord.html', form=form, formats=formats)
 
 
 # Edit a record based on _id
@@ -97,6 +98,7 @@ def edit_record(record_id):
             },
         )
     form = new_event_form()
+    formats = formats = mongo.db.MtG_Formats.find()
     records = mongo.db.Player_Records
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -115,16 +117,16 @@ def edit_record(record_id):
             return redirect(url_for('homepage'))
 
         record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
-        return render_template('editrecord.html', record=record, form=form)
+        return render_template('editrecord.html', record=record, form=form, formats=formats)
 
     try:
         record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
-        return render_template('editrecord.html', record=record, form=form)
+        return render_template('editrecord.html', record=record, form=form,  formats=formats)
     except Exception:
         flash("Record was not found!", "error")
         return redirect(url_for('homepage'))
 
-    return render_template('editrecord.html', record=record, form=form)
+    return render_template('editrecord.html', record=record, form=form,  formats=formats)
 
 
 # Deletes a record from the data base

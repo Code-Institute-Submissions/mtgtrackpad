@@ -17,12 +17,7 @@
   action="{{ url_for('new_record') }}"
   onkeydown="return event.key != 'Enter';"
 >
-{{ form.csrf_token }}
-<ul>
-{% for errors in form.errors %}
-    <li style="color:red;">{{ errors }}</li>
-{% endfor %}
-</ul>
+  {{ form.csrf_token }}
   <!-- ---------------JQUERY CALC CONTAINER---------------  -->
   <div
     class="modal fade"
@@ -83,12 +78,30 @@
       <div class="row text-center">
         <div class="col-12 col-md-3">
           {{ form.player_name.label }} {{ form.player_name }}
+          <div class="my-1 text-center">
+            {% for errors in form.player_name.errors %}
+            <p class="m-0" style="color: red;">{{ errors }}</p>
+            {% endfor %}
+          </div>
         </div>
         <div class="col-12 col-md-3">
-          {{ form.mtgformat.label }} {{ form.mtgformat }}
+          {{ form.mtgformat.label }}
+          <div class="input-group mb-3">
+  <select class="custom-select text-center" id="mtgformat" name="mtgformat">
+    <option class="text-center m-auto" selected>Choose Format</option>
+    {% for format in formats %}
+    <option class="text-center" value="{{format.format_name}}">{{ format.format_name }}</option>
+    {% endfor %}
+  </select>
+</div>
         </div>
         <div class="col-12 col-md-3">
           {{ form.deck_name.label }} {{ form.deck_name }}
+          <div class="my-1 text-center">
+            {% for errors in form.deck_name.errors %}
+            <p class="m-0" style="color: red;">{{ errors }}</p>
+            {% endfor %}
+          </div>
         </div>
         <div class="col-12 col-md-3">
           {{ form.event_date.label }} {{ form.event_date }}
@@ -111,18 +124,33 @@
             </div>
             <div class="col-12 text-center">
               {{ form.first_oppname }}
+              <div class="my-1 text-center">
+                {% for errors in form.first_oppname.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.first_oppdeck.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.first_oppdeck }}
+              <div class="my-1 text-center">
+                {% for errors in form.first_oppdeck.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.first_w.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.first_w(class_="wonnumber boxnumber") }}
+              <div class="my-1 text-center">
+                {% for errors in form.first_w.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.first_d.label }}
@@ -135,6 +163,11 @@
             </div>
             <div class="col-12 text-center">
               {{ form.first_l(class_='boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.first_l.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -149,18 +182,33 @@
             </div>
             <div class="col-12 text-center">
               {{ form.second_oppname(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.second_oppname.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.second_oppdeck.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.second_oppdeck(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.second_oppdeck.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.second_w.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.second_w(class_='form_box wonnumber boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.second_w.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.second_d.label }}
@@ -173,6 +221,11 @@
             </div>
             <div class="col-12 text-center">
               {{ form.second_l(class_='form_box boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.second_l.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -187,18 +240,33 @@
             </div>
             <div class="col-12 text-center">
               {{ form.third_oppname(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.third_oppname.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.third_oppdeck.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.third_oppdeck(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.third_oppdeck.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.third_w.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.third_w(class_='form_box wonnumber boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.third_w.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.third_d.label }}
@@ -211,6 +279,11 @@
             </div>
             <div class="col-12 text-center">
               {{ form.third_l(class_='form_box boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.third_l.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -227,18 +300,33 @@
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_oppname(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fourth_oppname.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_oppdeck.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_oppdeck(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fourth_oppdeck.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_w.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_w(class_='form_box wonnumber boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fourth_w.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_d.label }}
@@ -251,6 +339,11 @@
             </div>
             <div class="col-12 text-center">
               {{ form.fourth_l(class_='form_box boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fourth_l.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -265,18 +358,33 @@
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_oppname(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fifth_oppname.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_oppdeck.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_oppdeck(class_='form_box') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fifth_oppdeck.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_w.label }}
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_w(class_='form_box wonnumber boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fifth_w.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_d.label }}
@@ -289,6 +397,11 @@
             </div>
             <div class="col-12 text-center">
               {{ form.fifth_l(class_='form_box boxnumber') }}
+              <div class="my-1 text-center">
+                {% for errors in form.fifth_l.errors %}
+                <p class="m-0" style="color: red;">{{ errors }}</p>
+                {% endfor %}
+              </div>
             </div>
           </div>
         </div>
@@ -296,21 +409,20 @@
     </div>
   </div>
   <!-- ---------------FORM BUTTONS CONTAINER---------------  -->
-  <br>
+  <br />
   <div class="container-fluid my-3 text-center">
     <div class="row text-center">
       <div class="col-12 col-md-4 my-2 mx-auto">
         <button
-        type="button"
-        class="btn btn-warning check-fields"
-        data-toggle="modal"
-        data-target="#exampleModal"
-      >
-        Calculate Event Results
-      </button>
+          type="button"
+          class="btn btn-warning check-fields"
+          data-toggle="modal"
+          data-target="#exampleModal"
+        >
+          Calculate Event Results
+        </button>
       </div>
     </div>
   </div>
 </form>
-
 {% endblock %}

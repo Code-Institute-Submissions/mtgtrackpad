@@ -136,6 +136,8 @@ table {
     color: rgba(255,193,7,1)
 }
 
+
+/*golden code from codepen created by <insert name here>*/
 .golden {
 	background: -webkit-linear-gradient(top,  #f9d400 15%,#f89b00 35%,#f9d400 70%); /* Chrome10+,Safari5.1+ */
 	-webkit-background-clip:text;
@@ -208,4 +210,18 @@ table {
       background-color: rgba(52,58,54,1);
       border: 1px solid rgba(255,193,7,1);
       border-style: groove;
+  }
+
+  .custom-select {
+    height: 32.375px;
+    padding: 3.2px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    border: solid 1px grey;
+    border-radius: 5px;
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: 1.5;
   }
