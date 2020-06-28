@@ -1,8 +1,5 @@
 import os
 from flask import Flask, render_template, redirect, url_for, request, flash
-from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
-from wtforms.fields.html5 import DateField
 from forms import new_event_form
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -47,6 +44,18 @@ def player_history(player_name):
 # New record route to record new data
 @app.route('/new_record', methods=['GET', 'POST'])
 def new_record():
+    event_rounds = []
+    for i, num in enumerate(['first', 'second', 'third', 'fourth', 'fifth']):
+        event_rounds.append(
+            {
+                'round': i+1,
+                'opp_name': request.form.get(f'{num}_oppname'),
+                'opp_deck': request.form.get(f'{num}_oppdeck'),
+                'games_won': request.form.get(f'{num}_w'),
+                'games_drawn': request.form.get(f'{num}_d'),
+                'games_lost': request.form.get(f'{num}_l')
+            },
+        )
     form = new_event_form()
     newrecord = mongo.db.Player_Records
     if request.method == 'POST':
@@ -56,49 +65,10 @@ def new_record():
                 'mtgformat': request.form.get('mtgformat'),
                 'deck_name': request.form.get('deck_name'),
                 'event_date': request.form.get('event_date'),
-                'event_rounds': [
-                    {
-                        'round': 1,
-                        'opp_name': request.form.get('first_oppname'),
-                        'opp_deck': request.form.get('first_oppdeck'),
-                        'games_won': request.form.get('first_w'),
-                        'games_drawn': request.form.get('first_d'),
-                        'games_lost': request.form.get('first_l')
-                    },
-                    {
-                        'round': 2,
-                        'opp_name': request.form.get('second_oppname'),
-                        'opp_deck': request.form.get('second_oppdeck'),
-                        'games_won': request.form.get('second_w'),
-                        'games_drawn': request.form.get('second_d'),
-                        'games_lost': request.form.get('second_l')
-                    },
-                    {
-                        'round': 3,
-                        'opp_name': request.form.get('third_oppname'),
-                        'opp_deck': request.form.get('third_oppdeck'),
-                        'games_won': request.form.get('third_w'),
-                        'games_drawn': request.form.get('third_d'),
-                        'games_lost': request.form.get('third_l')
-                    },
-                    {
-                        'round': 4,
-                        'opp_name': request.form.get('fourth_oppname'),
-                        'opp_deck': request.form.get('fourth_oppdeck'),
-                        'games_won': request.form.get('fourth_w'),
-                        'games_drawn': request.form.get('fourth_d'),
-                        'games_lost': request.form.get('fourth_l')
-                    },
-                    {
-                        'round': 5,
-                        'opp_name': request.form.get('fifth_oppname'),
-                        'opp_deck': request.form.get('fifth_oppdeck'),
-                        'games_won': request.form.get('fifth_w'),
-                        'games_drawn': request.form.get('fifth_d'),
-                        'games_lost': request.form.get('fifth_l')
-                    }
-                ],
-                # Inputs are JQuery generated. A function is called to calc them into uneditable input fields
+                'event_rounds': event_rounds,
+                # Inputs are JQuery generated.
+                # A function is called to calc
+                # them into uneditable input fields
                 'final_record': request.form.get('eventrecordinput'),
                 'gamewin_perc': request.form.get('eventgamewin'),
                 'event_status': request.form.get('eventstatusinput')
@@ -114,6 +84,18 @@ def new_record():
 # Edit a record based on _id
 @app.route('/edit_record/<record_id>', methods=['GET', 'POST'])
 def edit_record(record_id):
+    event_rounds = []
+    for i, num in enumerate(['first', 'second', 'third', 'fourth', 'fifth']):
+        event_rounds.append(
+            {
+                'round': i+1,
+                'opp_name': request.form.get(f'{num}_oppname'),
+                'opp_deck': request.form.get(f'{num}_oppdeck'),
+                'games_won': request.form.get(f'{num}_w'),
+                'games_drawn': request.form.get(f'{num}_d'),
+                'games_lost': request.form.get(f'{num}_l')
+            },
+        )
     form = new_event_form()
     records = mongo.db.Player_Records
     if request.method == 'POST':
@@ -124,48 +106,7 @@ def edit_record(record_id):
                                    'mtgformat': request.form.get('mtgformat'),
                                    'deck_name': request.form.get('deck_name'),
                                    'event_date': request.form.get('event_date'),
-                                   'event_rounds': [
-                                        {
-                                            'round': 1,
-                                            'opp_name': request.form.get('first_oppname'),
-                                            'opp_deck': request.form.get('first_oppdeck'),
-                                            'games_won': request.form.get('first_w'),
-                                            'games_drawn': request.form.get('first_d'),
-                                            'games_lost': request.form.get('first_l')
-                                        },
-                                       {
-                                            'round': 2,
-                                            'opp_name': request.form.get('second_oppname'),
-                                            'opp_deck': request.form.get('second_oppdeck'),
-                                            'games_won': request.form.get('second_w'),
-                                            'games_drawn': request.form.get('second_d'),
-                                            'games_lost': request.form.get('second_l')
-                                        },
-                                       {
-                                            'round': 3,
-                                            'opp_name': request.form.get('third_oppname'),
-                                            'opp_deck': request.form.get('third_oppdeck'),
-                                            'games_won': request.form.get('third_w'),
-                                            'games_drawn': request.form.get('third_d'),
-                                            'games_lost': request.form.get('third_l')
-                                        },
-                                       {
-                                            'round': 4,
-                                            'opp_name': request.form.get('fourth_oppname'),
-                                            'opp_deck': request.form.get('fourth_oppdeck'),
-                                            'games_won': request.form.get('fourth_w'),
-                                            'games_drawn': request.form.get('fourth_d'),
-                                            'games_lost': request.form.get('fourth_l')
-                                        },
-                                       {
-                                            'round': 5,
-                                            'opp_name': request.form.get('fifth_oppname'),
-                                            'opp_deck': request.form.get('fifth_oppdeck'),
-                                            'games_won': request.form.get('fifth_w'),
-                                            'games_drawn': request.form.get('fifth_d'),
-                                            'games_lost': request.form.get('fifth_l')
-                                        }
-                                   ],
+                                   'event_rounds': event_rounds,
                                    # Jquery function calcs these inputs as uneditable fields
                                    'final_record': request.form.get('eventrecordinput'),
                                    'gamewin_perc': request.form.get('eventgamewin'),
@@ -173,6 +114,7 @@ def edit_record(record_id):
             flash('Event record has been updated!')
             return redirect(url_for('homepage'))
 
+        record = mongo.db.Player_Records.find_one({'_id': ObjectId(record_id)})
         return render_template('editrecord.html', record=record, form=form)
 
     try:
@@ -199,9 +141,11 @@ def remove_record(record_id):
     flash('Event record has been deleted!')
     return redirect(url_for('homepage'))
 
+
 @app.errorhandler(404)
 def error404(error):
     return redirect(url_for('errorpage404'))
+
 
 @app.route('/errorpage404')
 def errorpage404():

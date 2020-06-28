@@ -1,5 +1,20 @@
 /*Link Test = document.getElementById("demo").innerHTML = 5 + 6;*/
 
+let roundCalc = function($won, $lost) {
+  if (
+    $($won).val() == 2 ||
+    ($($won).val() == 1 && $($lost).val() == 0)
+  ) {
+    return "won";
+  } else if ($($won).val() == 1 && $($lost).val() == 1) {
+    return "draw";
+  } else if ($($won).val() == "" && $($lost).val() == "") {
+    return "undefined";
+  } else {
+    return "loss";
+  }
+}
+
 $(document).ready(function () {
   $(".check-fields").on("click", function () {
     var reqlength = $(".form_box").length;
@@ -18,88 +33,19 @@ $(document).ready(function () {
 
     var results = [];
 
-    if (
-      $("#first_w").val() == 2 ||
-      ($("#first_w").val() == 1 && $("#first_l").val() == 0)
-    ) {
-      res = "won";
-    } else if ($("#first_w").val() == 1 && $("#first_l").val() == 1) {
-      res = "draw";
-    } else if ($("#first_w").val() == '' && $("#first_l").val() == '') {
-        res1 ="undefined";
-    } else {
-      res = "loss";
-    }
-
-    if (
-      $("#second_w").val() == 2 ||
-      ($("#second_w").val() == 1 && $("#second_l").val() == 0)
-    ) {
-      res2 = "won";
-    } else if ($("#second_w").val() == 1 && $("#second_l").val() == 1) {
-      res2 = "draw";
-    } else if ($("#second_w").val() == '' && $("#second_l").val() == '') {
-        res2 ="undefined";
-    } else {
-      res2 = "loss";
-    }
-
-    if (
-      $("#third_w").val() == 2 ||
-      ($("#third_w").val() == 1 && $("#third_l").val() == 0)
-    ) {
-      res3 = "won";
-    } else if ($("#third_w").val() == 1 && $("#third_l").val() == 1) {
-      res3 = "draw";
-    } else if ($("#third_w").val() == '' && $("#third_l").val() == '') {
-        res3 ="undefined";
-    } else {
-      res3 = "loss";
-    }
-
-    if (
-      $("#fourth_w").val() == 2 ||
-      ($("#fourth_w").val() == 1 && $("#fourth_l").val() == 0)
-    ) {
-      res4 = "won";
-    } else if ($("#fourth_w").val() == 1 && $("#fourth_l").val() == 1) {
-      res4 = "draw";
-    } else if ($("#fourth_w").val() == '' && $("#fourth_l").val() == '') {
-        res4 ="undefined";
-    } else {
-      res4 = "loss";
-    }
-
-    if (
-      $("#fifth_w").val() == 2 ||
-      ($("#fifth_w").val() == 1 && $("#fifth_l").val() == 0)
-    ) {
-      res5 = "won";
-    } else if ($("#fifth_w").val() == 1 && $("#fifth_l").val() == 1) {
-      res5 = "draw";
-    } else if ($("#fifth_w").val() == '' && $("#fifth_l").val() == '') {
-        res5 ="undefined";
-    } else {
-      res5 = "loss";
-    }
-
-    results.push(res, res2, res3, res4, res5);
+    results.push(roundCalc(first_w, first_l), roundCalc(second_w, second_l), roundCalc(third_w, third_l), roundCalc(fourth_w, fourth_l), roundCalc(fifth_w, fifth_l));
     console.log(results);
 
-    var wontarget = "won";
-    var drawtarget = "draw";
-    var losstarget = "loss";
-
     var roundswon = $.grep(results, function (elem) {
-      return elem === wontarget;
+      return elem === "won";
     }).length;
 
     var roundsdrawn = $.grep(results, function (elem) {
-      return elem === drawtarget;
+      return elem === "draw";
     }).length;
 
     var roundslost = $.grep(results, function (elem) {
-      return elem === losstarget;
+      return elem === "loss";
     }).length;
 
     $("#eventrecordinput").val(
@@ -122,10 +68,11 @@ $(document).ready(function () {
   });
 
   $("#playerhistory").on("click", function () {
-      player_name = $("#playername").val()
-        if( player_name.length === 0 ) {
-            $('#myModal').modal('show');
-        } else {
-      window.location.href = "/player_history/"+player_name
-  }});
+    player_name = $("#playername").val();
+    if (player_name.length === 0) {
+      $("#myModal").modal("show");
+    } else {
+      window.location.href = "/player_history/" + player_name;
+    }
+  });
 });
