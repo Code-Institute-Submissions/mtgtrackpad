@@ -1,4 +1,6 @@
 /*Link Test = document.getElementById("demo").innerHTML = 5 + 6;*/
+
+/*Function to determine if a round was won, lost or drawn*/
 let roundCalc = function($won, $lost) {
     if (
         $($won).val() == 2 ||
@@ -14,7 +16,10 @@ let roundCalc = function($won, $lost) {
     }
 }
 
+//Document ready main block
 $(document).ready(function() {
+    //on click function to calculate three form fields
+    //Assigns event status as Incomplete or Complete
     $(".check-fields").on("click", function() {
         var reqlength = $(".form_box").length;
 
@@ -29,12 +34,13 @@ $(document).ready(function() {
         }
 
         $("#eventstatusinput").val(content);
-
+        //User the roundCalc function to build an array of 'won', 'lost', 'draw' results
         var results = [];
 
         results.push(roundCalc(first_w, first_l), roundCalc(second_w, second_l), roundCalc(third_w, third_l), roundCalc(fourth_w, fourth_l), roundCalc(fifth_w, fifth_l));
         console.log(results);
 
+        //Counts the number of 'won', 'lost', 'draw' values in results array and concatenates the values
         var roundswon = $.grep(results, function(elem) {
             return elem === "won";
         }).length;
@@ -51,6 +57,7 @@ $(document).ready(function() {
             roundswon + " - " + roundsdrawn + " - " + roundslost
         );
 
+        //Calculates a game win percentage by totalling games won and deviding it by games played
         var gameswon = 0;
         $(".wonnumber").each(function() {
             gameswon = parseInt($(this).val() || 0) + gameswon;
@@ -66,6 +73,7 @@ $(document).ready(function() {
         $("#eventgamewin").val(gamewinpercentage);
     });
 
+    //Search function that is called by a user pressing search in the nav bar
     $("#playerhistory").on("click", function() {
         player_name = $("#playername").val();
         if (player_name.length === 0) {
